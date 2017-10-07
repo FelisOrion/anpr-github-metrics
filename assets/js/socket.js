@@ -65,7 +65,7 @@ url.on('keypress', event => {
   }
 });
 
-channel.on('new_metrics', payload => {
+channel.on('metrics', payload => {
   buildGraph(payload.metrics);
 });
 
