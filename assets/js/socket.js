@@ -65,13 +65,50 @@ url.on('keypress', event => {
     url.val('');
   }
 });
+alert('dfdds');
+
+
 
 channel.on("stato", payload => {
   console.log(payload);
 });
 
 channel.on("lista", payload => {
+
+let url_btn = $('#url_btn');
+
+url_btn.on('click', event => {
+    console.log("push");
+    channel.push('new_message', { name: name.val(), message: message.val() });
+    url.val('');
+});
+
+
+channel.on('metrics', payload => {
+
   console.log(payload);
+
+  new Chart(document.getElementById("chartjs-0"), {
+    type: 'line',
+    data: {
+      labels: ["January", "February", "March", "April", "May", "June", "July"],
+      datasets: [{
+          label: "My First Dataset",
+          data: [65, 59, 80, 81, 56, 55, 40],
+          fill: false,
+          borderColor: "rgb(75, 192, 192)",
+          lineTension: 0.1
+      }, {
+          label: "My First Dataset",
+          data: [12, 43],
+          fill: false,
+          borderColor: "rgb(34, 65, 67)",
+          lineTension: 0.1
+      }]
+    },
+    options: {}
+  });
+
 });
 
 channel.join()
