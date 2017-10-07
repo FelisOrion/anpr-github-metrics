@@ -60,7 +60,7 @@ let url = $('#url');
 url.on('keypress', event => {
   if (event.keyCode == 13) {
     console.log("push");
-    channel.push('new_message', { name: name.val(), message: message.val() });
+    channel.push('url', { url: name.val() });
     url.val('');
   }
 });
