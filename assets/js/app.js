@@ -61,7 +61,6 @@ url.on('keypress', event => {
   if (event.keyCode == 13) {
     console.log("push");
     channel.push('url', { url: url.val() });
-    url.val('');
   }
 });
 alert('dfdds');
@@ -70,55 +69,14 @@ let url_btn = $('#url_btn');
 
 url_btn.on('click', event => {
     console.log("push");
-    channel.push('url', { url: url.val() });
+    channel.push("url", { url: url.val() });
     url.val('');
 });
 
 channel.on('metrics', payload => {
   console.log('CIAO');
 
-  new Chart(document.getElementById("chartjs-0s"), {
-    type: 'line',
-    data: {
-      labels: ["January", "February", "March", "April", "May", "June", "July"],
-      datasets: [{
-          label: "My First Dataset",
-          data: [65, 59, 80, 81, 56, 55, 40],
-          fill: false,
-          borderColor: "rgb(75, 192, 192)",
-          lineTension: 0.1
-      }, {
-          label: "My First Dataset",
-          data: [12, 43],
-          fill: false,
-          borderColor: "rgb(34, 65, 67)",
-          lineTension: 0.1
-      }]
-    },
-    options: {}
-  });
 
-
-  new Chart(document.getElementById("chartjs-0b"), {
-    type: 'line',
-    data: {
-      labels: ["January", "February", "March", "April", "May", "June", "July"],
-      datasets: [{
-          label: "My First Dataset",
-          data: [65, 59, 80, 81, 56, 55, 40],
-          fill: false,
-          borderColor: "rgb(75, 192, 192)",
-          lineTension: 0.1
-      }, {
-          label: "My First Dataset",
-          data: [12, 43],
-          fill: false,
-          borderColor: "rgb(34, 65, 67)",
-          lineTension: 0.1
-      }]
-    },
-    options: {}
-  });
 });
 
 channel.join()

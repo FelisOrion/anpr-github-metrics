@@ -12,17 +12,15 @@
       <br /><br />
       <canvas
         id="chartjs-0b"
-        class="chartjs2"
         width="770"
         height="385"
-        style="display: block; width: 770px; height: 385px;"
+        style="width: 770px; height: 385px;"
       ></canvas>
       <canvas
         id="chartjs-0s"
-        class="chartjs1"
         width="300"
         height="200"
-        style="display: block; width: 320px; height: 200px;"
+        style=" width: 320px; height: 200px;"
       ></canvas>
     </div>
 
@@ -44,14 +42,12 @@
       <br /><br />
       <canvas
         id="chartjs-4b"
-        class="chartjs2"
         width="770"
         height="385"
         style="width: 770px; height: 385px;"
       ></canvas>
       <canvas
         id="chartjs-4s"
-        class="chartjs1"
         width="320"
         height="200"
         style="width: 320px; height: 200px;"
@@ -70,20 +66,22 @@
 
 
 <style>
-@media (min-width: 0px) and (max-width: 600px) {
-  canvas.chartjs2 {
-    display: block !important;
+
+@media only screen and (min-device-width: 600px) {
+  canvas#chartjs-0s {
+    display: none !important;
   };
-  canvas.chartjs1 {
+  canvas#chartjs-4s {
     display: none !important;
   };
 }
-@media (min-width: 600px) and (max-width: 300000px) {
-  canvas.chartjs2 {
+
+@media only screen and (min-device-width: 0px) and (max-device-width: 599px) {
+  canvas#chartjs-0b {
     display: none !important;
   };
-  canvas.chartjs1 {
-    display: block !important;
+  canvas#chartjs-4b {
+    display: none !important;
   };
 }
 </style>
