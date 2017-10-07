@@ -1,40 +1,89 @@
+<br />
+<br />
+<br />
+<br />
+
 <div class="container">
   <div class="row">
-    <div class="col">
-      1 of 2
+    <div class="col"></div>
+
+    <div class="w-600">
+      <h3>Questo e questaltro</h3>
+      <br /><br />
+      <canvas
+        id="chartjs-0b"
+        class="chartjs2"
+        width="770"
+        height="385"
+        style="display: block; width: 770px; height: 385px;"
+      ></canvas>
+      <canvas
+        id="chartjs-0s"
+        class="chartjs1"
+        width="300"
+        height="200"
+        style="display: block; width: 320px; height: 200px;"
+      ></canvas>
     </div>
-    <div class="col">
-      2 of 2
-    </div>
-    <div class="col">
-      2 of 2
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      1 of 3
-    </div>
-    <div class="w-400">
-      2 of 3
-    </div>
-    <div class="col">
-      3 of 3
-    </div>
+
+    <div class="col"></div>
   </div>
 </div>
 
-<canvas
-  id="chartjs-0"
-  class="chartjs"
-  width="770"
-  height="385"
-  style="display: block; width: 770px; height: 385px;"
-></canvas>
+<br />
+<br />
+<br />
+<br />
 
-<canvas
-  id="chartjs-4"
-  class="chartjs"
-  width="770"
-  height="385"
-  style="display: block; width: 770px; height: 385px;"
-></canvas>
+<div class="container">
+  <div class="row">
+    <div class="col"></div>
+
+    <div class="w-600">
+      <h3>Questo e questaltro</h3>
+      <br /><br />
+      <canvas
+        id="chartjs-4b"
+        class="chartjs2"
+        width="770"
+        height="385"
+        style="width: 770px; height: 385px;"
+      ></canvas>
+      <canvas
+        id="chartjs-4s"
+        class="chartjs1"
+        width="320"
+        height="200"
+        style="width: 320px; height: 200px;"
+      ></canvas>
+    </div>
+
+    <div class="col"></div>
+  </div>
+</div>
+
+
+<br />
+<br />
+<br />
+<br />
+
+
+<style>
+@media (min-width: 0px) and (max-width: 600px) {
+  canvas.chartjs2 {
+    display: block !important;
+  };
+  canvas.chartjs1 {
+    display: none !important;
+  };
+}
+@media (min-width: 600px) and (max-width: 300000px) {
+  canvas.chartjs2 {
+    display: none !important;
+  };
+  canvas.chartjs1 {
+    display: block !important;
+  };
+}
+</style>

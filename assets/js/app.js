@@ -1,182 +1,129 @@
-// Brunch automatically concatenates all files in your
-// watched paths. Those paths can be configured at
-// config.paths.watched in "brunch-config.js".
+// NOTE: The contents of this file will only be executed if
+// you uncomment its entry in "assets/js/app.js".
+
+// To use Phoenix channels, the first step is to import Socket
+// and connect at the socket path in "lib/web/endpoint.ex":
+import {Socket} from "phoenix"
+
+let socket = new Socket("/socket", {params: {token: window.userToken}})
+
+// When you connect, you'll often need to authenticate the client.
+// For example, imagine you have an authentication plug, `MyAuth`,
+// which authenticates the session and assigns a `:current_user`.
+// If the current user exists you can assign the user's token in
+// the connection for use in the layout.
 //
-// However, those files will only be executed if
-// explicitly imported. The only exception are files
-// in vendor, which are never wrapped in imports and
-// therefore are always executed.
-
-// Import dependencies
+// In your "lib/web/router.ex":
 //
-// If you no longer want to use a dependency, remember
-// to also remove its path from "config.paths.watched".
-//import "phoenix_html"
-//import Socket from "./socket"
-
-// Import local files
+//     pipeline :browser do
+//       ...
+//       plug MyAuth
+//       plug :put_user_token
+//     end
 //
-// Local files can be imported directly using relative
-// paths "./socket" or full ones "web/static/js/socket".
+//     defp put_user_token(conn, _) do
+//       if current_user = conn.assigns[:current_user] do
+//         token = Phoenix.Token.sign(conn, "user socket", current_user.id)
+//         assign(conn, :user_token, token)
+//       else
+//         conn
+//       end
+//     end
+//
+// Now you need to pass this token to JavaScript. You can do so
+// inside a script tag in "lib/web/templates/layout/app.html.eex":
+//
+//     <script>window.userToken = "<%= assigns[:user_token] %>";</script>
+//
+// You will need to verify the user token in the "connect/2" function
+// in "lib/web/channels/user_socket.ex":
+//
+//     def connect(%{"token" => token}, socket) do
+//       # max_age: 1209600 is equivalent to two weeks in seconds
+//       case Phoenix.Token.verify(socket, "user socket", token, max_age: 1209600) do
+//         {:ok, user_id} ->
+//           {:ok, assign(socket, :user, user_id)}
+//         {:error, reason} ->
+//           :error
+//       end
+//     end
+//
+// Finally, pass the token on connect as below. Or remove it
+// from connect if you don't care about authentication.
 
-// import socket from "./socket"
+socket.connect()
 
-//$(function() {
-  // Fuel per 100k data //
-  /*
-  var fuel_data = [{
-    "period": "2013-01",
-    "city": 66,
-    "highway": 34,
-    "idle": 9
-  }, {
-    "period": "2013-02",
-    "city": 62,
-    "highway": 33,
-    "idle": 8
-  }, {
-    "period": "2013-03",
-    "city": 61,
-    "highway": 32,
-    "idle": 7
-  }, {
-    "period": "2013-04",
-    "city": 66,
-    "highway": 32,
-    "idle": 6
-  }, {
-    "period": "2013-05",
-    "city": 67,
-    "highway": 31,
-    "idle": 5
-  }, {
-    "period": "2013-06",
-    "city": 68,
-    "highway": 43,
-    "idle": 7
-  }, {
-    "period": "2013-07",
-    "city": 62,
-    "highway": 32,
-    "idle": 5
-  }, {
-    "period": "2013-08",
-    "city": 61,
-    "highway": 32,
-    "idle": 5
-  }, {
-    "period": "2013-09",
-    "city": 58,
-    "highway": 32,
-    "idle": 7
-  }, {
-    "period": "2013-10",
-    "city": 60,
-    "highway": 32,
-    "idle": 7
-  }, {
-    "period": "2013-11",
-    "city": 60,
-    "highway": 32,
-    "idle": 6
-  }, {
-    "period": "2013-12",
-    "city": 62,
-    "highway": 32,
-    "idle": 8
-  }];
-  Morris.Line({
-    element: 'fuel-consumption',
-    hideHover: 'auto',
-    data: fuel_data,
-    xkey: 'period',
-    xLabels: 'month',
-    ykeys: ['city', 'highway', 'idle'],
-    postUnits: ' l/100km',
-    labels: ['City', 'Highway', 'Idle'],
-    resize: true,
-    lineColors: ['#A52A2A', '#72A0C1', '#7BB661']
-      //yLabelFormat: function(y) { return y.toString() + ' l/100km'; }
-  });
-  // / Fuel per 1000k data //
-  // Fuel projection //
-  Morris.Donut({
-    element: 'fuel-projection',
-    hideHover: 'auto',
-    resize: true,
-    data: [{
-      label: 'Consumption until today',
-      value: 180
-    }, {
-      label: 'Projected consumption',
-      value: 400
-    }, ],
-    colors: ['#7BB661', '#72A0C1'],
-    formatter: function(y) {
-      return y + " liters"
-    }
+// Now that you are connected, you can join channels with a topic:
+let channel = socket.channel("metrics:lobby", {})
+let url = $('#url');
+
+url.on('keypress', event => {
+  if (event.keyCode == 13) {
+    console.log("push");
+    channel.push('url', { url: url.val() });
+    url.val('');
+  }
+});
+alert('dfdds');
+
+let url_btn = $('#url_btn');
+
+url_btn.on('click', event => {
+    console.log("push");
+    channel.push('url', { url: url.val() });
+    url.val('');
+});
+
+channel.on('metrics', payload => {
+  console.log('CIAO');
+
+  new Chart(document.getElementById("chartjs-0s"), {
+    type: 'line',
+    data: {
+      labels: ["January", "February", "March", "April", "May", "June", "July"],
+      datasets: [{
+          label: "My First Dataset",
+          data: [65, 59, 80, 81, 56, 55, 40],
+          fill: false,
+          borderColor: "rgb(75, 192, 192)",
+          lineTension: 0.1
+      }, {
+          label: "My First Dataset",
+          data: [12, 43],
+          fill: false,
+          borderColor: "rgb(34, 65, 67)",
+          lineTension: 0.1
+      }]
+    },
+    options: {}
   });
 
 
-  var fuel_data = [{
-    "period": "2013-01",
-    "city": 66,
-    "highway": 34,
-    "idle": 9
-  }, {
-    "period": "2013-02",
-    "city": 62,
-    "highway": 33,
-    "idle": 8
-  }, {
-    "period": "2013-03",
-    "city": 61,
-    "highway": 32,
-    "idle": 7
-  }, {
-    "period": "2013-04",
-    "city": 66,
-    "highway": 32,
-    "idle": 6
-  }, {
-    "period": "2013-05",
-    "city": 67,
-    "highway": 31,
-    "idle": 5
-  }, {
-    "period": "2013-06",
-    "city": 68,
-    "highway": 43,
-    "idle": 7
-  }, {
-    "period": "2013-07",
-    "city": 62,
-    "highway": 32,
-    "idle": 5
-  }, {
-    "period": "2013-08",
-    "city": 61,
-    "highway": 32,
-    "idle": 5
-  }, {
-    "period": "2013-09",
-    "city": 58,
-    "highway": 32,
-    "idle": 7
-  }, {
-    "period": "2013-10",
-    "city": 60,
-    "highway": 32,
-    "idle": 7
-  }, {
-    "period": "2013-11",
-    "city": 60,
-    "highway": 32,
-    "idle": 6
-  }, {
-    "period": "2013-12",
-    "city": 62,
-    "highway": 32,
-    "idle": 8
-  }];
-});*/
+  new Chart(document.getElementById("chartjs-0b"), {
+    type: 'line',
+    data: {
+      labels: ["January", "February", "March", "April", "May", "June", "July"],
+      datasets: [{
+          label: "My First Dataset",
+          data: [65, 59, 80, 81, 56, 55, 40],
+          fill: false,
+          borderColor: "rgb(75, 192, 192)",
+          lineTension: 0.1
+      }, {
+          label: "My First Dataset",
+          data: [12, 43],
+          fill: false,
+          borderColor: "rgb(34, 65, 67)",
+          lineTension: 0.1
+      }]
+    },
+    options: {}
+  });
+});
+
+channel.join()
+  .receive("ok", resp => { console.log("Joined successfully", resp) })
+  .receive("error", resp => { console.log("Unable to join", resp) })
+
+
+export default socket
