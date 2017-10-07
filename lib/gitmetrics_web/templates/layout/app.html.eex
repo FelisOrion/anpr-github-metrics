@@ -26,12 +26,13 @@
     <script src="https://unpkg.com/bootstrap-material-design@4.0.0-beta.3/dist/js/bootstrap-material-design.js" integrity="sha384-hC7RwS0Uz+TOt6rNG8GX0xYCJ2EydZt1HeElNwQqW+3udRol4XwyBfISrNDgQcGA" crossorigin="anonymous"></script>
     <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
+    <script src="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"></script>
     <script type="text/javascript" src="<%= static_path(@conn, "/js/app.js") %>"></script>
     <!--<script src="<%= static_path(@conn, "/js/app.js") %>"></script>!-->
 
     <script>
 
-    new Chart(document.getElementById("chartjs-0s"), {
+    /*new Chart(document.getElementById("chartjs-0s"), {
       type: 'line',
       data: {
         labels: ["January", "February", "March", "April", "May", "June", "July"],
@@ -86,18 +87,39 @@
         }
     });
 
+    */
+
+    new Chart(document.getElementById("chartjs-0b"), {
+      type: 'line',
+      data: {
+        labels: ["A", "B", "C", "D", "E", "F", "G"],
+        datasets: [{
+            label: "Issues tempo risposta",
+            data: [0, 3, 4, 1, 6, 9, 2, 10],
+            fill: false,
+            borderColor: "grey",
+            lineTension: 0.1
+        }, {
+            label: "Media tempo risposta",
+            data: [3, 4, 5, 4, 3, 2, 2, 3],
+            fill: false,
+            lineTension: 0.1
+        }]
+      },
+      options: {}
+    });
+
     new Chart(document.getElementById("chartjs-4b"), {
         type: "doughnut",
         data: {
-            labels: ["Red", "Blue", "Yellow"],
+            labels: ["Aperte", "Chiuse"],
             datasets: [{
-                label: "My First Dataset",
-                data: [300, 50, 100],
-                backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)", "rgb(255, 205, 86)"]
+                label: "Issues",
+                data: [3 , 6],
+                backgroundColor: ["grey"]
             }]
         }
     });
-
 
     </script>
   </body>

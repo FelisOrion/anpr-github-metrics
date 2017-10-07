@@ -1,14 +1,14 @@
-<br />
+<br id="P1" />
 <br />
 <br />
 <br />
 
-<div class="container">
+<div class="container" >
   <div class="row">
     <div class="col"></div>
 
     <div class="w-600">
-      <h3>Questo e questaltro</h3>
+      <h3>Creazione issues tempo risposta</h3>
       <br /><br />
       <canvas
         id="chartjs-0b"
@@ -16,29 +16,23 @@
         height="385"
         style="width: 770px; height: 385px;"
       ></canvas>
-      <canvas
-        id="chartjs-0s"
-        width="300"
-        height="200"
-        style=" width: 320px; height: 200px;"
-      ></canvas>
     </div>
 
     <div class="col"></div>
   </div>
 </div>
 
-<br />
+<br id="P2" />
 <br />
 <br />
 <br />
 
-<div class="container">
+<div class="container" >
   <div class="row">
     <div class="col"></div>
 
     <div class="w-600">
-      <h3>Questo e questaltro</h3>
+      <h3>Stato issues</h3>
       <br /><br />
       <canvas
         id="chartjs-4b"
@@ -46,12 +40,6 @@
         height="385"
         style="width: 770px; height: 385px;"
       ></canvas>
-      <canvas
-        id="chartjs-4s"
-        width="320"
-        height="200"
-        style="width: 320px; height: 200px;"
-      ></canvas>
     </div>
 
     <div class="col"></div>
@@ -63,25 +51,3 @@
 <br />
 <br />
 <br />
-
-
-<style>
-
-@media only screen and (min-device-width: 600px) {
-  canvas#chartjs-0s {
-    display: none !important;
-  };
-  canvas#chartjs-4s {
-    display: none !important;
-  };
-}
-
-@media only screen and (min-device-width: 0px) and (max-device-width: 599px) {
-  canvas#chartjs-0b {
-    display: none !important;
-  };
-  canvas#chartjs-4b {
-    display: none !important;
-  };
-}
-</style>
