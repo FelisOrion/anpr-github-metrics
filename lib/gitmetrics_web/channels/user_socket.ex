@@ -3,7 +3,7 @@ defmodule GitmetricsWeb.UserSocket do
 
   ## Channels
   # channel "room:*", GitmetricsWeb.RoomChannel
-
+  channel "metrics:lobby", GitmetricsWeb.MetricsChannel
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
   # transport :longpoll, Phoenix.Transports.LongPoll
