@@ -11,8 +11,8 @@
 //
 // If you no longer want to use a dependency, remember
 // to also remove its path from "config.paths.watched".
-import "phoenix_html"
-import Socket from "./socket"
+//import "phoenix_html"
+//import Socket from "./socket"
 
 // Import local files
 //
@@ -21,8 +21,9 @@ import Socket from "./socket"
 
 // import socket from "./socket"
 
-$(function() {
+//$(function() {
   // Fuel per 100k data //
+  /*
   var fuel_data = [{
     "period": "2013-01",
     "city": 66,
@@ -115,4 +116,67 @@ $(function() {
       return y + " liters"
     }
   });
-});
+
+
+  var fuel_data = [{
+    "period": "2013-01",
+    "city": 66,
+    "highway": 34,
+    "idle": 9
+  }, {
+    "period": "2013-02",
+    "city": 62,
+    "highway": 33,
+    "idle": 8
+  }, {
+    "period": "2013-03",
+    "city": 61,
+    "highway": 32,
+    "idle": 7
+  }, {
+    "period": "2013-04",
+    "city": 66,
+    "highway": 32,
+    "idle": 6
+  }, {
+    "period": "2013-05",
+    "city": 67,
+    "highway": 31,
+    "idle": 5
+  }, {
+    "period": "2013-06",
+    "city": 68,
+    "highway": 43,
+    "idle": 7
+  }, {
+    "period": "2013-07",
+    "city": 62,
+    "highway": 32,
+    "idle": 5
+  }, {
+    "period": "2013-08",
+    "city": 61,
+    "highway": 32,
+    "idle": 5
+  }, {
+    "period": "2013-09",
+    "city": 58,
+    "highway": 32,
+    "idle": 7
+  }, {
+    "period": "2013-10",
+    "city": 60,
+    "highway": 32,
+    "idle": 7
+  }, {
+    "period": "2013-11",
+    "city": 60,
+    "highway": 32,
+    "idle": 6
+  }, {
+    "period": "2013-12",
+    "city": 62,
+    "highway": 32,
+    "idle": 8
+  }];
+});*/
