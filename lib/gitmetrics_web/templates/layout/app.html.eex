@@ -18,11 +18,8 @@
     <script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"  type="text/css" >
 
-    <link rel="stylesheet" href="css/graph.css" type="text/css">
-    <script src="<%= static_path(@conn, "/js/graph.js") %>"></script>
     <title>Hello Gitmetrics!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/graph.css") %>">
   </head>
 
   <body>

@@ -5,13 +5,14 @@ exports.config = {
       joinTo: "js/app.js"
 
       // To use a separate vendor.js bundle, specify two files path
-      // http://brunch.io/docs/config#-files-
+      // https://github.com/brunch/brunch/blob/master/docs/config.md#files
       // joinTo: {
-      //   "js/app.js": /^js/,
-      //   "js/vendor.js": /^(?!js)/
+      //  "js/app.js": /^(js)/,
+      //  "js/vendor.js": /^(vendor)|(deps)/
       // }
       //
       // To change the order of concatenation of files, explicitly mention here
+      // https://github.com/brunch/brunch/tree/master/docs#concatenation
       // order: {
       //   before: [
       //     "vendor/js/jquery-2.1.1.js",
@@ -37,7 +38,7 @@ exports.config = {
   // Phoenix paths configuration
   paths: {
     // Dependencies and current project directories to watch
-    watched: ["static", "css", "js", "vendor"],
+    watched: ["static", "css", "js", "vendor", "elm"],
     // Where to compile files to
     public: "../priv/static"
   },
@@ -47,12 +48,19 @@ exports.config = {
     babel: {
       // Do not use ES6 compiler in vendor code
       ignore: [/vendor/]
-    }
+    },
+  elmBrunch: {
+        // elmFolder: "../elm",
+        mainModules: ["elm/Main.elm"],
+        makeParameters: ['--debug'],
+        outputFolder: "../assets/js"
+      }
   },
 
   modules: {
     autoRequire: {
       "js/app.js": ["js/app"]
+    // whitelist: ["phoenix", "phoenix_html", "jquery", "underscore"]
     }
   },
 
