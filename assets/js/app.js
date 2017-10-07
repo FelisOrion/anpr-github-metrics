@@ -60,7 +60,8 @@ let url = $('#url');
 url.on('keypress', event => {
   if (event.keyCode == 13) {
     console.log("push");
-    channel.push('url', { url: url.val() });
+    channel.push("stato", { url: url.val() });
+    channel.push("lista", { url: url.val() });
   }
 });
 
@@ -68,11 +69,12 @@ let url_btn = $('#url_btn');
 
 url_btn.on('click', event => {
     console.log("push");
-    channel.push("url", { url: url.val() });
+    channel.push("stato", { url: url.val() });
+    channel.push("lista", { url: url.val() });
     url.val('');
 });
 
-channel.on('metrics', pl => {
+channel.on("stato", pl => {
   new Chart(document.getElementById("chartjs-4b"), {
       type: "doughnut",
       data: {
@@ -105,6 +107,31 @@ channel.on('metrics', pl => {
     },
     options: {}
   });
+});
+
+channel.on("lista", payload => {
+  console.log(payload);
+
+  new Chart(document.getElementById("chartjs-0b"), {
+    type: 'line',
+    data: {
+      labels: ["A", "B", "C", "D", "E", "F", "G"],
+      datasets: [{
+          label: "Issues tempo risposta",
+          data: [0, 3, 4, 1, 6, 9, 2, 10],
+          fill: false,
+          borderColor: "grey",
+          lineTension: 0.1
+      }, {
+          label: "Media tempo risposta",
+          data: [3, 4, 5, 4, 3, 2, 2, 3],
+          fill: false,
+          lineTension: 0.1
+      }]
+    },
+    options: {}
+  });
+
 });
 
 channel.join()
