@@ -17,7 +17,6 @@ defmodule Gitmetrics.Managment  do
     def api_call({org, repo}) do
        Tentacat.Issues.list(org, repo)
        |> Enum.reduce([], fn(x, acc) -> acc ++ [get_data(x)] end)
-       |> send_metrics()
     end
 
     defp get_data(issue) do
@@ -54,10 +53,19 @@ defmodule Gitmetrics.Managment  do
           }] end)
     end
 
+    def send_metrics([]), do: %{totale: 0, aperte: 0, chiuse: 0}
     def send_metrics(list) do
       %{totale: length(list),
-        aperte: Enum.reduce(list, 0, fn(x, acc) -> if x.state == "open", do: acc+1 end),
-        chiuse: Enum.reduce(list, 0, fn(x, acc) -> if x.state == "closed", do: acc+1 end),
+        aperte: check(list, "open"),
+        chiuse: check(list, "closed"),
       }
+    end
+
+    defp check([], _), do: 0
+    defp check(list, key) do
+      case Enum.reduce(list, 0, fn(x, acc) -> if x.state == key, do: acc+1 end) do
+        nil -> 0
+        num -> num
+      end
     end
 end
