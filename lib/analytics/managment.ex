@@ -17,7 +17,7 @@ defmodule Gitmetrics.Managment  do
     def api_call({org, repo}) do
        Tentacat.Issues.list(org, repo)
        |> Enum.reduce([], fn(x, acc) -> acc ++ [get_data(x)] end)
-       |> send_metrics
+       |> send_metrics()
     end
 
     defp get_data(issue) do

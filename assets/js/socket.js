@@ -60,13 +60,13 @@ let url = $('#url');
 url.on('keypress', event => {
   if (event.keyCode == 13) {
     console.log("push");
-    channel.push('url', { url: name.val() });
+    channel.push("url", {url: url.val() });
     url.val('');
   }
 });
 
-channel.on('metrics', payload => {
-  buildGraph(payload.metrics);
+channel.on("metrics", payload => {
+  console.log(payload);
 });
 
 channel.join()
