@@ -75,7 +75,7 @@ channel.on("lista", payload => {
 });
 
 channel.join()
-  .receive("ok", resp => { console.log("Joined successfully", resp) })
+  .receive("ok", resp => { console.log("Joined successfully", getSocketData(resp)) })
   .receive("error", resp => { console.log("Unable to join", resp) })
 
 
