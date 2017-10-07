@@ -13,17 +13,27 @@ defmodule GitmetricsWeb.MetricsChannel do
 
   # Channels can be used in a request/response fashion
   # by sending replies to requests from the client
-  def handle_in("url", _payload, socket) do
+  def handle_in("stato", _payload, socket) do
     metrics =
       {"ueberauth", "guardian"}
       # payload.url
       # |> Managment.init_url
       |> Managment.api_call
-      |> Managment.send_metrics
-    push socket, "metrics", metrics
+      |> Managment.send_metrics_stato
+    push socket, "stato", metrics
     {:noreply, socket}
   end
 
+  def handle_in("lista", _payload, socket) do
+    metrics =
+      {"ueberauth", "guardian"}
+      # payload.url
+      # |> Managment.init_url
+      |> Managment.api_call
+      |> Managment.send_metrics_lista
+    push socket, "lista", metrics
+    {:noreply, socket}
+  end
   # It is also common to receive messages from the client and
   # broadcast to everyone in the current topic (metrics:lobby).
 

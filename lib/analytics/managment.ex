@@ -1,4 +1,5 @@
 defmodule Gitmetrics.Managment  do
+    alias Gitmetrics.Cache
     @moduledoc """
     Modulo per github api
     """
@@ -15,8 +16,11 @@ defmodule Gitmetrics.Managment  do
     defp get_names([repo | [ org | _tail ]]), do: {org, repo} #repo | organizazione
 
     def api_call({org, repo}) do
-       Tentacat.Issues.list(org, repo)
-       |> Enum.reduce([], fn(x, acc) -> acc ++ [get_data(x)] end)
+       with {:ok, list} <- Cache.pull(org, repo) do
+          Enum.reduce(list, [], fn(x, acc) -> acc ++ [get_data(x)] end)
+       else
+         _ -> []
+       end
     end
 
     defp get_data(issue) do
@@ -53,8 +57,13 @@ defmodule Gitmetrics.Managment  do
           }] end)
     end
 
-    def send_metrics([]), do: %{totale: 0, aperte: 0, chiuse: 0}
-    def send_metrics(list) do
+    def send_metrics_lista([]), do: %{issues: []}
+    def send_metrics_lista(list) do
+      %{issues: list}
+    end
+
+    def send_metrics_stato([]), do: %{totale: 0, aperte: 0, chiuse: 0}
+    def send_metrics_stato(list) do
       %{totale: length(list),
         aperte: check(list, "open"),
         chiuse: check(list, "closed"),

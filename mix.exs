@@ -20,7 +20,7 @@ defmodule Gitmetrics.Mixfile do
   def application do
     [
       mod: {Gitmetrics.Application, []},
-      extra_applications: [:logger, :runtime_tools, :tentacat]
+      extra_applications: [:logger, :runtime_tools, :tentacat, :cachex]
     ]
   end
 
@@ -41,6 +41,7 @@ defmodule Gitmetrics.Mixfile do
       {:phoenix_html, "~> 2.10"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
+      {:cachex, "~> 2.1"},
       {:cowboy, "~> 1.0"}
     ]
   end

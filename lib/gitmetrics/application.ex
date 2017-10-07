@@ -12,6 +12,9 @@ defmodule Gitmetrics.Application do
       supervisor(Gitmetrics.Repo, []),
       # Start the endpoint when the application starts
       supervisor(GitmetricsWeb.Endpoint, []),
+      worker(Cachex, [:cache, [default_ttl: :timer.hours(1),
+                               limit: %Cachex.Limit{ limit: 1_000_000,
+                               policy: Cachex.Policy.LRW, reclaim: 0.001 } ]]),
       # Start your own worker by calling: Gitmetrics.Worker.start_link(arg1, arg2, arg3)
       # worker(Gitmetrics.Worker, [arg1, arg2, arg3]),
     ]
