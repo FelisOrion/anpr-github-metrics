@@ -1,36 +1,57 @@
-<div class="jumbotron">
-  <h2><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h2>
-  <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
-</div>
-
-<div class="row marketing">
-  <div class="col-lg-6">
-    <h4>Resources</h4>
-    <ul>
-      <li>
-        <a href="http://phoenixframework.org/docs/overview">Guides</a>
+<div id="monitor" class="panel panel-default tab-box">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+            <i class="fa fa-signal"></i>
+            Monitoring report
+        </h3>
+    <ul class="nav nav-tabs">
+      <li class="active">
+        <a href="#fuel-tab" data-toggle="tab">Fuel data</a>
       </li>
       <li>
-        <a href="https://hexdocs.pm/phoenix">Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
+        <a href="#co2-tab" data-toggle="tab">Co2 data</a>
       </li>
     </ul>
   </div>
-
-  <div class="col-lg-6">
-    <h4>Help</h4>
-    <ul>
-      <li>
-        <a href="http://groups.google.com/group/phoenix-talk">Mailing list</a>
-      </li>
-      <li>
-        <a href="http://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">@elixirphoenix</a>
-      </li>
-    </ul>
+  <div class="panel-body">
+    <div class="tab-content">
+      <div id="fuel-tab" class="tab-pane active">
+        <div class="row">
+          <div class="col-sm-12 col-md-7 chart">
+            <div class="caption">
+              Fuel consumption last 12 months
+              <span class="label label-default">Liter/100km</span>
+            </div>
+            <div id="fuel-consumption"></div>
+            <div class="legend">
+              <span id="city" class="label">City</span>
+              <span id="highway" class="label">Highway</span>
+              <span id="idle" class="label">Idle</span>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-5 chart">
+            <div class="caption">
+              Fuel projection this month
+            </div>
+            <div id="fuel-projection"></div>
+            <div class="legend">
+              <span id="projection" class="label">Projection</span>
+              <span id="today" class="label">Until today</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="co2-tab" class="tab-pane">
+        <div class="row">
+          <div class="col-xs-12 chart">
+            <div class="caption">
+              Monthly Co2 Emissions
+              <span class="label label-default">g/km</span>
+            </div>
+            <div id="co2-emissions"></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
