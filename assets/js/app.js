@@ -12,6 +12,7 @@
 // If you no longer want to use a dependency, remember
 // to also remove its path from "config.paths.watched".
 import "phoenix_html"
+import Socket from "./socket"
 
 // Import local files
 //
@@ -112,59 +113,6 @@ $(function() {
     colors: ['#7BB661', '#72A0C1'],
     formatter: function(y) {
       return y + " liters"
-    }
-  });
-  // / Fuel projection //
-  // CO2 Emissons //
-  bar = Morris.Bar({
-    element: 'co2-emissions',
-    resize: true,
-    data: [{
-      month: 'Jan',
-      emissions: 35
-    }, {
-      month: 'Feb',
-      emissions: 37
-    }, {
-      month: 'Mar',
-      emissions: 40
-    }, {
-      month: 'Apr',
-      emissions: 38
-    }, {
-      month: 'Maj',
-      emissions: 39
-    }, {
-      month: 'Jun',
-      emissions: 42
-    }, {
-      month: 'Jul',
-      emissions: 37
-    }, {
-      month: 'Aug',
-      emissions: 65
-    }, {
-      month: 'Sep',
-      emissions: 38
-    }, {
-      month: 'Okt',
-      emissions: 45
-    }, {
-      month: 'Nov',
-      emissions: 41
-    }, {
-      month: 'Dec',
-      emissions: 41
-    }],
-    xkey: 'month',
-    ykeys: ['emissions'],
-    labels: ['Co2 emissions'],
-    barRatio: 0.4,
-    xLabelAngle: 35,
-    hideHover: 'auto',
-    postUnits: ' g/km',
-    formatter: function(y) {
-      return y + " g/km"
     }
   });
 });

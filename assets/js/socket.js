@@ -55,8 +55,23 @@ socket.connect()
 
 // Now that you are connected, you can join channels with a topic:
 let channel = socket.channel("metrics:lobby", {})
+let url = $('#url');
+
+url.on('keypress', event => {
+  if (event.keyCode == 13) {
+    console.log("push");
+    channel.push('new_message', { name: name.val(), message: message.val() });
+    url.val('');
+  }
+});
+
+channel.on('new_metrics', payload => {
+  buildGraph(payload.metrics);
+});
+
 channel.join()
   .receive("ok", resp => { console.log("Joined successfully", resp) })
   .receive("error", resp => { console.log("Unable to join", resp) })
+
 
 export default socket
