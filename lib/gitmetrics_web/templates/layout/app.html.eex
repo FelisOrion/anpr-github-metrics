@@ -19,6 +19,10 @@
       <%= render @view_module, @view_template, assigns %>
     </main>
 
+    <main role="modal">
+      <%= render @view_module, "login.html", assigns %>
+    </main>
+
     <!--<p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
     <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>!-->
 
@@ -26,15 +30,14 @@
     <script src="https://unpkg.com/popper.js@1.12.5/dist/umd/popper.js" integrity="sha384-KlVcf2tswD0JOTQnzU4uwqXcbAy57PvV48YUiLjqpk/MJ2wExQhg9tuozn5A1iVw" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/bootstrap-material-design@4.0.0-beta.3/dist/js/bootstrap-material-design.js" integrity="sha384-hC7RwS0Uz+TOt6rNG8GX0xYCJ2EydZt1HeElNwQqW+3udRol4XwyBfISrNDgQcGA" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
+    <script src="https://momentjs.com/downloads/moment.js"></script>
 
     <script type="text/javascript" src="<%= static_path(@conn, "/js/app.js") %>"></script>
 
     <script>
 
-    $(document).ready(function() {
-      $('body').bootstrapMaterialDesign();
-      $('.collapse').collapse();
-    });
+    $('body').bootstrapMaterialDesign();
+    $('.collapse').collapse();
 
     new Chart(document.getElementById("chartjs-0b"), {
       type: 'line',
@@ -64,6 +67,18 @@
                 label: "Issues",
                 data: [3 , 6],
                 backgroundColor: ["grey"]
+            }]
+        }
+    });
+
+    new Chart(document.getElementById("chartjs-7b"), {
+        type: "doughnut",
+        data: {
+            labels: ["T1", "T2", "T3"],
+            datasets: [{
+                label: "Issues",
+                data: [7 , 3, 5],
+                backgroundColor: ["grey", "black"]
             }]
         }
     });

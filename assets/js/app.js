@@ -56,12 +56,15 @@ socket.connect()
 // Now that you are connected, you can join channels with a topic:
 let channel = socket.channel("metrics:lobby", {})
 let url = $('#url');
+let login_btn = $('#login-btn');
+let name = $('#exampleInputEmail1');
+let password = $('#exampleInputPassword1');
 
 url.on('keypress', event => {
   if (event.keyCode == 13) {
     console.log("push");
-    channel.push("stato", { url: url.val() });
-    channel.push("lista", { url: url.val() });
+    channel.push("stato", { url: url.val(), name: name.val(), password: password.val()});
+    channel.push("lista", { url: url.val(), name: name.val(), password: password.val()});
   }
 });
 
@@ -69,11 +72,12 @@ let url_btn = $('#url_btn');
 
 url_btn.on('click', event => {
     console.log("push");
-    channel.push("stato", { url: url.val() });
-    channel.push("lista", { url: url.val() });
-    channel.push("resptime", { url: url.val() });
-    channel.push("closetime", { url: url.val() });
-    channel.push("info", {url: url.val() });
+
+    channel.push("stato", { url: url.val(), name: name.val(), password: password.val()});
+    channel.push("lista", { url: url.val(), name: name.val(), password: password.val()});
+    channel.push("resptime", { url: url.val(), name: name.val(), password: password.val()});
+    channel.push("closetime", { url: url.val(), name: name.val(), password: password.val()});
+    channel.push("info", {url: url.val(), name: name.val(), password: password.val()});
     url.val('');
 });
 
@@ -83,24 +87,31 @@ url_btn.on('click', event => {
  */
 channel.on("resptime", pl => {
     console.log("resptime", pl);
+
     var onlyOpen = [];
     var tmp1 = {};
     var tmp2 = 1;
     var totTime = 0;
     var rangeOpen = [];
 
-    for(var i in pl.list) {
-      tmp1 = pl.list[i];
+    for(var i in pl.resp) {
+      tmp1 = pl.resp[i];
 
       if(tmp1.time) {
-        onlyOpen.push(tmp1.time);
+        onlyOpen.push(Math.round(tmp1.time / 60));
         rangeOpen.push("IS " + tmp2++);
       };
 
-      totTime += tmp1.time;
+      totTime += Math.round(tmp1.time / 60);
     };
 
-    media = totTime / pl.list.length;
+    var nMedia = 0;
+    nMedia = Math.round(totTime / pl.resp.length);
+
+    var aMedia = [];
+    for(var b in onlyOpen) {
+      aMedia.push(nMedia);
+    };
 
     new Chart(document.getElementById("chartjs-0b"), {
       type: 'line',
@@ -114,8 +125,9 @@ channel.on("resptime", pl => {
             lineTension: 0.1
         }, {
             label: "Media tempo risposta",
-            data: [media],
+            data: aMedia,
             fill: false,
+            borderColor: "rgb(255, 99, 132)",
             lineTension: 0.1
         }]
       },
@@ -154,6 +166,67 @@ channel.on("stato", pl => {
  * Questa funzione intercetta la lista e visualizza la lista di issues
  */
 channel.on("lista", pl => {
+  var table = $('#tableContent');
+  var issue = {};
+  var html = '';
+  var btn = {};
+  var stringDate = '';
+  var YYYY = '';
+  var MM = '';
+  var DD = '';
+  var DATE = '';
+
+  btn.icon = function(icon) {
+    var html = '';
+
+    html  = '<i class="'+icon+'" >';
+    html += "</i>";
+
+    return html;
+  };
+
+  if(pl.issues.length) {
+    table.empty();
+  };
+
+  for(var is in pl.issues) {
+    issue = pl.issues[is];
+
+    if(issue.state === 'open') {
+      html  = "<tr>";
+      html += "<td>" + issue.title + "</td>";
+      html += "<td>Aperta</td>";
+
+      YYYY = moment(issue.created_at).year();
+      MM = moment(issue.created_at).month();
+      DD = moment(issue.created_at).day();
+      DATE = DD +'/'+ MM +'/'+ YYYY;
+
+      stringDate = "Creato il: " + DATE;
+
+      YYYY = moment(issue.created_at).year();
+      MM = moment(issue.created_at).month();
+      DD = moment(issue.created_at).day();
+      DATE = DD +'/'+ MM +'/'+ YYYY;
+
+      stringDate += "\nModificato il: " + DATE;
+
+      html += "<td data-toggle='tooltip' title='"+stringDate+"'>" + btn.icon('ion-calendar') + "</td>";
+
+      stringDate = "Visualizza su GitHub.com";
+      html += "<td data-toggle='tooltip' title='"+stringDate+"'>";
+      html += "<a href='" +issue.url+ "' target='_blank'>" + btn.icon('ion-social-github') + "</a></td>";
+
+      html += "</tr>";
+
+      console.log(html);
+
+      table.append(html);
+    }
+
+    $('[data-toggle="tooltip"]').tooltip();
+  }
+
   console.log('LISTA', pl);
 });
 

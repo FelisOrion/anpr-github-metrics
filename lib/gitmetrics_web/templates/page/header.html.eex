@@ -18,12 +18,18 @@
           <a class="nav-link" href="#P2">Cerchio</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#P3">Lista</a>
+          <a class="nav-link" href="#P3">Triangolo</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#P4">Lista</a>
+        </li>
+
+
       </ul>
-      <form class="form-inline my-2 my-lg-0" action="?">
+      <form class="form-inline my-2 my-lg-0" action="#">
         <input id="url" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button id="url_btn" class="btn btn-outline-success my-2 my-sm-0">Search</button>
+        <button id="url_btn" class="btn btn-outline-success my-2 my-sm-0" style="margin-left:14px">Search</button>
+        <button id="open_modal_login" class="btn btn-outline-success my-2 my-sm-0" style="margin-left:14px" data-toggle="modal" data-target="#exampleModal">Login</button>
       </form>
     </div>
   </div>

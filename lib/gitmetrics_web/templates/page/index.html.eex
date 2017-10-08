@@ -47,6 +47,7 @@
 </div>
 
 
+
 <br id="P3" />
 <br />
 <br />
@@ -57,24 +58,62 @@
     <div class="col"></div>
 
     <div class="w-600">
-      <h3>Lista issues    </h3>
+      <h3>ADA</h3>
+      <br /><br />
+      <canvas
+        id="chartjs-7b"
+        width="770"
+        height="385"
+        style="width: 770px; height: 385px;"
+      ></canvas>
+    </div>
+
+    <div class="col"></div>
+  </div>
+</div>
+
+
+<br id="P4" />
+<br />
+<br />
+<br />
+
+<div class="container" >
+  <div class="row">
+    <div class="col"></div>
+
+    <div class="w-600">
+      <h3>ADA</h3>
       <br /><br />
 
-      <p>
-        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-          Link with href
-        </a>
-        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-          Button with data-target
-        </button>
-      </p>
-      <div class="collapse" id="collapseExample">
-        <div class="card card-body">
-          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-        </div>
-      </div>
+      <table class="table table-hover" style="width:770px;text-align:center">
+        <thead>
+          <tr>
+            <th>Titolo</th>
+            <th>Stato</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="tableContent">
+          <tr>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <td>Thornton</td>
+            <td>Larry the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-      
     <div class="col"></div>
   </div>
 </div>
