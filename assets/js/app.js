@@ -73,6 +73,7 @@ url_btn.on('click', event => {
     channel.push("lista", { url: url.val() });
     channel.push("resptime", { url: url.val() });
     channel.push("closetime", { url: url.val() });
+    channel.push("info", {url: url.val() });
     url.val('');
 });
 
@@ -81,6 +82,10 @@ channel.on("resptime", pl => {
 });
 
 channel.on("closetime", pl => {
+  console.log(pl);
+});
+
+channel.on("info", pl => {
   console.log(pl);
 });
 

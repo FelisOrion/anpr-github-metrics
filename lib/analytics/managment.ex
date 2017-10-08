@@ -74,6 +74,22 @@ defmodule Gitmetrics.Managment  do
         }] end)
     end
 
+    def send_info_status([]), do: %{close_no_comments: 0, no_commentate: 0, no_labele: 0}
+    def send_info_status(list) do
+      %{
+        close_no_comments: Enum.reduce(list, 0, fn(x, acc) -> acc + count_items(x.state, x.comments) end),
+        no_commentate: Enum.reduce(list, 0, fn(x, acc) -> acc + count_items(x.comments) end),
+        no_labele: Enum.reduce(list, 0, fn(x, acc) -> acc + count_items(x.state, x.labels) end),
+      }
+    end
+
+    defp count_items(nil), do: 0
+    defp count_items([]), do: 0
+    defp count_items(num), do: num
+    defp count_items("open", []), do: 1
+    defp count_items("closed", 0), do: 1
+    defp count_items(_, _), do: 0
+
 
     def send_issues_time([], _, _, _), do: %{}
     def send_issues_time(list, org, repo, client) do

@@ -35,6 +35,17 @@ defmodule GitmetricsWeb.MetricsChannel do
     {:noreply, socket}
   end
 
+  def handle_in("info", _payload, socket) do
+    metrics =
+      {"era", "pay"}
+      # payload.url
+      # |> Managment.init_url
+      |> Managment.api_call()
+      |> Managment.send_info_status()
+    push socket, "info", metrics
+    {:noreply, socket}
+  end
+
   def handle_in("closetime", _payload, socket) do
     metrics =
       {"era", "pay"}
