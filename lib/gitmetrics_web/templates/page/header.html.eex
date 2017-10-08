@@ -8,20 +8,20 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left:30px">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#P1">T1</a>
+        <li class="nav-item" data-toggle="tooltip" title="TEST">
+          <a class="nav-link" href="#P1">PRA</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#P2">T2</a>
+          <a class="nav-link" href="#P2">SS </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#P3">T3</a>
+          <a class="nav-link" href="#P3">TS</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#P4">T4</a>
+          <a class="nav-link" href="#P4">PRC</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#P5">Lista issues</a>
+          <a class="nav-link" href="#P5">LSA</a>
         </li>
         <li class="nav-item">
           <button id="open_modal_login" class="btn btn-outline-success my-2 my-sm-0" style="margin-left:14px" data-toggle="modal" data-target="#exampleModal">Login</button>

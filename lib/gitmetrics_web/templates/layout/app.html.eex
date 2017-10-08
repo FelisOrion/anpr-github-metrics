@@ -63,6 +63,7 @@
 
     $('body').bootstrapMaterialDesign();
     $('.collapse').collapse();
+    $('[data-toggle="tooltip"]').tooltip();
 
     new Chart(document.getElementById("chartjs-gff"), {
       type: 'line',

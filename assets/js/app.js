@@ -263,7 +263,6 @@ channel.on("lista", pl => {
 
       if(issue.body.length > 200) {
         issue.body = issue.body.slice(0, 200) + '...';
-        issue.body = $(issue.body).text();
       }
 
       html += "<td data-toggle='tooltip' title='"+issue.body+"'>";
