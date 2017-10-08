@@ -1,4 +1,7 @@
 defmodule Gitmetrics.Cache do
+
+  alias Gitmetrics.Managment
+
   @moduledoc """
   The boundary for the Notification system.
   """
@@ -18,13 +21,11 @@ defmodule Gitmetrics.Cache do
   end
 
   def update(org, repo, client) do
-    with {:ok, list} <- Tentacat.Issues.filter(org, repo, %{state: "all"}, client) |> can_i_send? do
+    with {:ok, list} <- Tentacat.Issues.filter(org, repo, %{state: "all"}, client) |> Managment.can_i_send? do
       push("#{org}/#{repo}", list)
     end
   end
 
-  defp can_i_send?({403, _}), do: {:error, :limit}
-  defp can_i_send?(list), do: {:ok, list}
   @doc """
   Just get list from cache and return {:ok, list} | {:missing, nil}
   """

@@ -1,5 +1,6 @@
 defmodule Gitmetrics.Managment  do
     alias Gitmetrics.Cache
+    alias Tentacat.Issues.Comments
     @moduledoc """
     Modulo per github api
     """
@@ -17,14 +18,21 @@ defmodule Gitmetrics.Managment  do
 
     def api_call({org, repo}) do
        with {:ok, list} <- Cache.pull(org, repo) do
-          Enum.reduce(list, [], fn(x, acc) -> acc ++ [get_data(x)] end)
+          list
+          |> Flow.from_enumerable()
+          |> Flow.partition()
+          |> Flow.reduce(fn -> [] end, fn(x, acc) -> acc ++ [get_data(x)] end)
+          |> Enum.sort()
        else
          _ -> []
        end
     end
 
     def get_data(issue) do
-      %{ assegnati: Map.get(issue, "assignees") |> get_assegnati(),
+      %{
+        id: Map.get(issue, "id"),
+        number: Map.get(issue, "number"),
+        assegnati: Map.get(issue, "assignees") |> get_assegnati(),
         body: Map.get(issue, "body"),
         created_at: Map.get(issue, "created_at"),
         closed_at: Map.get(issue, "closed_at"),
@@ -57,15 +65,50 @@ defmodule Gitmetrics.Managment  do
           }] end)
     end
 
-    def send_issues_time([]), do: %{issues: []}
-    def send_issues_time(list) do
+    # def calc_media_respons() do
+    #
+    # end
 
+    def send_issues_time([], _, _, _), do: %{issues: []}
+    def send_issues_time(list, org, repo, client) do
+      list
+      |> Enum.reduce([],
+          fn(x, acc) -> acc ++ [%{number: x.number,
+          time: match_date(x.created_at, get_comments(org, repo, x.comments, x.number, x.created_at, client))
+          }] end)
     end
+
+    defp get_comments(_, _, 0, _, _, _), do: 0
+    defp get_comments(org, repo, comments, number, created_at, client) do
+        Comments.filter(org, repo, number, %{since: created_at}, client)
+        |> can_i_send?()
+        |> get_first_commet()
+        |> Map.get("created_at")
+    end
+
+    defp match_date(issue, comment) do
+      with {:ok, date_issue, 0} <- DateTime.from_iso8601(issue),
+           {:ok, date_comment, 0} <- DateTime.from_iso8601(comment) do
+             DateTime.diff(date_comment, date_issue)
+             |> (fn(x) -> round(x/60) end).()
+      else
+        {:error, :invalid_format} -> 0
+      end
+    end
+
+    defp get_first_commet([]), do: 0
+    defp get_first_commet({:ok, [ h | _t]}), do: h
+    defp get_first_commet({:error, _}), do: 0
+    defp get_first_commet([ h | _t]), do: h
 
     def send_metrics_lista([]), do: %{issues: []}
     def send_metrics_lista(list) do
       %{issues: list}
     end
+
+    def can_i_send?({403, _}), do: {:error, :limit}
+    def can_i_send?({404, _}), do: {:error, :not_found}
+    def can_i_send?(list), do: {:ok, list}
 
     def send_metrics_stato([]), do: %{totale: 0, aperte: 0, chiuse: 0}
     def send_metrics_stato(list) do

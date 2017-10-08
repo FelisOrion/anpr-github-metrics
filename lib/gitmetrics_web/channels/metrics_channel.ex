@@ -24,6 +24,17 @@ defmodule GitmetricsWeb.MetricsChannel do
     {:noreply, socket}
   end
 
+  def handle_in("resptimed", _payload, socket) do
+    metrics =
+      {"era", "pay"}
+      # payload.url
+      # |> Managment.init_url
+      |> Managment.api_call()
+      |> Managment.send_issues_time("era", "pay", Tentacat.Client.new(%{user: "FelisOrion", password: "salaculo21122012"}))
+    push socket, "resptimed", %{list: metrics}
+    {:noreply, socket}
+  end
+
   def handle_in("lista", _payload, socket) do
     metrics =
       {"era", "pay"}

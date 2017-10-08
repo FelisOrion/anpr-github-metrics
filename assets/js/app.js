@@ -71,7 +71,12 @@ url_btn.on('click', event => {
     console.log("push");
     channel.push("stato", { url: url.val() });
     channel.push("lista", { url: url.val() });
+    channel.push("resptimed", { url: url.val() });
     url.val('');
+});
+
+channel.on("resptimed", pl => {
+  console.log(pl);
 });
 
 channel.on("stato", pl => {
