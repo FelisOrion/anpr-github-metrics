@@ -15,7 +15,7 @@ defmodule GitmetricsWeb.MetricsChannel do
   # by sending replies to requests from the client
   def handle_in("stato", _payload, socket) do
     metrics =
-      {"ueberauth", "guardian"}
+      {"era", "pay"}
       # payload.url
       # |> Managment.init_url
       |> Managment.api_call
@@ -26,7 +26,7 @@ defmodule GitmetricsWeb.MetricsChannel do
 
   def handle_in("lista", _payload, socket) do
     metrics =
-      {"ueberauth", "guardian"}
+      {"era", "pay"}
       # payload.url
       # |> Managment.init_url
       |> Managment.api_call

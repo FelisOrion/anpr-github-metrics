@@ -75,6 +75,8 @@ url_btn.on('click', event => {
 });
 
 channel.on("stato", pl => {
+  console.log(pl);
+
   new Chart(document.getElementById("chartjs-4b"), {
       type: "doughnut",
       data: {

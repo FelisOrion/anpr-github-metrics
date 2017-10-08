@@ -9,7 +9,7 @@ defmodule Gitmetrics.Managment  do
        url
         |> String.split("/")
         |> Enum.reverse
-        |> get_names
+        |> get_names()
     end
 
     #restituisce nome repository e organizzazione
@@ -23,7 +23,7 @@ defmodule Gitmetrics.Managment  do
        end
     end
 
-    defp get_data(issue) do
+    def get_data(issue) do
       %{ assegnati: Map.get(issue, "assignees") |> get_assegnati(),
         body: Map.get(issue, "body"),
         created_at: Map.get(issue, "created_at"),
@@ -57,6 +57,11 @@ defmodule Gitmetrics.Managment  do
           }] end)
     end
 
+    def send_issues_time([]), do: %{issues: []}
+    def send_issues_time(list) do
+
+    end
+
     def send_metrics_lista([]), do: %{issues: []}
     def send_metrics_lista(list) do
       %{issues: list}
@@ -71,10 +76,7 @@ defmodule Gitmetrics.Managment  do
     end
 
     defp check([], _), do: 0
-    defp check(list, key) do
-      case Enum.reduce(list, 0, fn(x, acc) -> if x.state == key, do: acc+1 end) do
-        nil -> 0
-        num -> num
-      end
-    end
+    defp check(list, key), do: Enum.reduce(list, 0, fn(x, acc) -> acc + does_match?(x.state, key) end)
+    defp does_match?(left, right) when left == right, do: 1
+    defp does_match?(left, right) when left != right, do: 0
 end

@@ -17,14 +17,14 @@ defmodule Gitmetrics.Cache do
     end
   end
 
-  def update(org, repo) do
-    with {:ok, list} <- Tentacat.Issues.list(org, repo) |> can_i_send do
+  def update(org, repo, client) do
+    with {:ok, list} <- Tentacat.Issues.filter(org, repo, %{state: "all"}, client) |> can_i_send? do
       push("#{org}/#{repo}", list)
     end
   end
 
-  defp can_i_send({403, _}), do: {:error, :limit}
-  defp can_i_send(list), do: {:ok, list}
+  defp can_i_send?({403, _}), do: {:error, :limit}
+  defp can_i_send?(list), do: {:ok, list}
   @doc """
   Just get list from cache and return {:ok, list} | {:missing, nil}
   """
@@ -32,7 +32,8 @@ defmodule Gitmetrics.Cache do
     with {:ok, list} <- Cachex.get(:cache, "#{org}/#{repo}") do
       {:ok, list}
     else
-      _ -> update(org, repo)
+      _ ->  auth = Tentacat.Client.new(%{user: "FelisOrion", password: "salaculo21122012"})
+            update(org, repo, auth)
     end
   end
 
