@@ -81,7 +81,6 @@ defmodule Gitmetrics.Managment  do
 
     def send_close_time([]), do: %{}
     def send_close_time(list) do
-      IO.inspect("timeeeeeeee")
       list
       |> Enum.reduce([], fn(x, acc) -> acc ++ [
         %{number: x.number,
@@ -91,7 +90,6 @@ defmodule Gitmetrics.Managment  do
 
     def send_info_status([]), do: %{close_no_comments: 0, no_commentate: 0, no_labele: 0}
     def send_info_status(list) do
-      IO.inspect("awdwawd")
       %{
         close_no_comments: Enum.reduce(list, 0, fn(x, acc) -> acc + count_items(x.state, x.comments) end),
         no_commentate: Enum.reduce(list, 0, fn(x, acc) -> acc + count_items(x.comments) end),
@@ -106,23 +104,22 @@ defmodule Gitmetrics.Managment  do
     defp count_items("closed", 0), do: 1
     defp count_items(_, _), do: 0
 
-
+    def send_issues_time([], _, _), do: %{}
     def send_issues_time([], _, _, _), do: %{}
-
-    def send_issues_time(list, {org, repo}, client) do
-      list
-      |> Enum.reduce([],
-          fn(x, acc) -> acc ++ [%{number: x.number,
-          time: match_date(x.created_at, get_comments(org, repo, x.comments, x.number, x.created_at, client))
-          }] end)
-      |> save_in_cache(org, repo)
-    end
-
-    def send_issues_time(list, {org, repo}) do
+    def send_issues_time(list, org, repo) do
       list
       |> Enum.reduce([],
           fn(x, acc) -> acc ++ [%{number: x.number,
           time: match_date(x.created_at, get_comments(org, repo, x.comments, x.number, x.created_at))
+          }] end)
+      |> save_in_cache(org, repo)
+    end
+
+    def send_issues_time(list, org, repo, client) do
+      list
+      |> Enum.reduce([],
+          fn(x, acc) -> acc ++ [%{number: x.number,
+          time: match_date(x.created_at, get_comments(org, repo, x.comments, x.number, x.created_at, client))
           }] end)
       |> save_in_cache(org, repo)
     end
@@ -137,7 +134,6 @@ defmodule Gitmetrics.Managment  do
 
     defp get_comments(_, _, 0, _, _), do: 0
     defp get_comments(org, repo, comments, number, created_at) do
-        IO.inspect("get commmenenenenene")
         Comments.filter(org, repo, number, since: created_at)
         |> can_i_send?()
         |> get_first_commet()

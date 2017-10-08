@@ -222,8 +222,6 @@ channel.on("lista", pl => {
 
       html += "</tr>";
 
-      console.log(html);
-
       table.append(html);
     }
 

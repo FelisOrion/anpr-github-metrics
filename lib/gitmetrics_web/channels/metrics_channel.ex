@@ -70,12 +70,11 @@ defmodule GitmetricsWeb.MetricsChannel do
   end
 
   defp send_issues_time_auth?(list, payload) do
-    if payload["name"] && payload["password"] == "" do
-      list
-      |> Managment.send_issues_time(Managment.init_url(payload["url"]))
+    {org, repo} = Managment.init_url(payload["url"])
+    if payload["name"] == "" || payload["password"] == "" do
+      Managment.send_issues_time(list, org, repo)
     else
-      list
-      |> Managment.send_issues_time(Managment.init_url(payload["url"]), %{user: payload["name"], password: payload["password"]})
+      Managment.send_issues_time(list, org, repo, Tentacat.Client.new(%{user: payload["name"], password: payload["password"]}))
     end
   end
   # It is also common to receive messages from the client and
