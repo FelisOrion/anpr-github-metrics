@@ -9,7 +9,7 @@
 
     <div class="w-600">
       <h3>Creazione issues tempo risposta</h3>
-      <br /><br />
+      <p style="max-width:770px">Hello world</p>
       <canvas
         id="chartjs-0b"
         width="770"
@@ -33,7 +33,7 @@
 
     <div class="w-600">
       <h3>Stato issues</h3>
-      <br /><br />
+      <p style="max-width:770px">Hello world</p>
       <canvas
         id="chartjs-4b"
         width="770"
@@ -59,7 +59,7 @@
 
     <div class="w-600">
       <h3>ADA</h3>
-      <br /><br />
+      <p style="max-width:770px">Hello world</p>
       <canvas
         id="chartjs-7b"
         width="770"
@@ -73,6 +73,7 @@
 </div>
 
 
+
 <br id="P4" />
 <br />
 <br />
@@ -83,32 +84,44 @@
     <div class="col"></div>
 
     <div class="w-600">
-      <h3>ADA</h3>
-      <br /><br />
+      <h3>Creazione issues tempo risposta</h3>
+      <p style="max-width:770px">Hello world</p>
+      <canvas
+        id="chartjs-gff"
+        width="770"
+        height="385"
+        style="width: 770px; height: 385px;"
+      ></canvas>
+    </div>
 
-      <table class="table table-hover" style="width:770px;text-align:center">
+    <div class="col"></div>
+  </div>
+</div>
+
+
+<br id="P5" />
+<br />
+<br />
+<br />
+
+<div class="container" >
+  <div class="row">
+    <div class="col"></div>
+
+    <div class="w-600">
+      <h3>ADA</h3>
+      <p style="max-width:770px">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+      <table class="table table-hover" style="max-width:770px;text-align:center">
         <thead>
           <tr>
-            <th>Titolo</th>
-            <th>Stato</th>
+            <th style="text-align:left">Titolo</th>
             <th></th>
           </tr>
         </thead>
         <tbody id="tableContent">
           <tr>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <td>Thornton</td>
-            <td>Larry the Bird</td>
-            <td>@twitter</td>
+            <td colspan="6">Niente</td>
           </tr>
         </tbody>
       </table>

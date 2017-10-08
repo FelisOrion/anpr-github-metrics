@@ -138,11 +138,67 @@ channel.on("resptime", pl => {
     });
 });
 channel.on("closetime", pl => {
-  console.log(pl);
+  console.log('closetime', pl);
+
+  var onlyClose = [];
+  var tmp1 = {};
+  var tmp2 = 1;
+  var totTime = 0;
+  var rangeClose = [];
+
+  for(var i in pl.close) {
+    tmp1 = pl.close[i];
+
+    if(tmp1.time) {
+      onlyClose.push(Math.round(tmp1.time / 60));
+      rangeClose.push("IS " + tmp2++);
+    };
+
+    totTime += Math.round(tmp1.time / 60);
+  };
+
+  var nMedia = 0;
+  nMedia = Math.round(totTime / pl.close.length);
+
+  var aMedia = [];
+  for(var b in onlyClose) {
+    aMedia.push(nMedia);
+  };
+
+  new Chart(document.getElementById("chartjs-gff"), {
+    type: 'line',
+    data: {
+      labels: rangeClose,
+      datasets: [{
+          label: "Issues tempo risposta",
+          data: onlyClose,
+          fill: false,
+          borderColor: "rgb(54, 162, 235)",
+          lineTension: 0.1
+      }, {
+          label: "Media tempo risposta",
+          data: aMedia,
+          fill: false,
+          borderColor: "rgb(255, 99, 132)",
+          lineTension: 0.1
+      }]
+    },
+    options: {}
+  });
 });
 
 channel.on("info", pl => {
-  console.log(pl);
+  new Chart(document.getElementById("chartjs-7b"), {
+      type: "doughnut",
+      data: {
+          labels: ["Chiuse senza commenti", "Senza commenti"],
+          datasets: [{
+              label: "Issues",
+              data: [pl.aperte, pl.chiuse],
+              backgroundColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"]
+          }]
+      }
+  });
 });
 
 
@@ -197,8 +253,17 @@ channel.on("lista", pl => {
 
     if(issue.state === 'open') {
       html  = "<tr>";
-      html += "<td>" + issue.title + "</td>";
-      html += "<td>Aperta</td>";
+      html += "<td style='text-align:left'>" + issue.title + "</td>";
+
+      html += "<td data-toggle='tooltip' title='Stato: aperto'>";
+      html +=  btn.icon('ion-checkmark-round') + "</td>";
+
+      if(issue.body.length > 200) {
+        issue.body = issue.body.slice(0, 200) + '...';
+      }
+
+      html += "<td data-toggle='tooltip' title='"+issue.body+"'>";
+      html +=  btn.icon('ion-document-text') + "</td>";
 
       YYYY = moment(issue.created_at).year();
       MM = moment(issue.created_at).month();
@@ -207,9 +272,9 @@ channel.on("lista", pl => {
 
       stringDate = "Creato il: " + DATE;
 
-      YYYY = moment(issue.created_at).year();
-      MM = moment(issue.created_at).month();
-      DD = moment(issue.created_at).day();
+      YYYY = moment(issue.updated_at).year();
+      MM = moment(issue.updated_at).month();
+      DD = moment(issue.updated_at).day();
       DATE = DD +'/'+ MM +'/'+ YYYY;
 
       stringDate += "\nModificato il: " + DATE;
@@ -237,3 +302,9 @@ channel.join()
 
 
 export default socket
+
+
+$(document).ready(function() {
+  $('body').bootstrapMaterialDesign();
+  $('.collapse').collapse();
+});

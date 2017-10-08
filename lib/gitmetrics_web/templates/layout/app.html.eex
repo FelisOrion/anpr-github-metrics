@@ -31,13 +31,15 @@
     <script src="https://unpkg.com/bootstrap-material-design@4.0.0-beta.3/dist/js/bootstrap-material-design.js" integrity="sha384-hC7RwS0Uz+TOt6rNG8GX0xYCJ2EydZt1HeElNwQqW+3udRol4XwyBfISrNDgQcGA" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
     <script src="https://momentjs.com/downloads/moment.js"></script>
+    <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
 
     <script type="text/javascript" src="<%= static_path(@conn, "/js/app.js") %>"></script>
 
     <script>
-
-    $('body').bootstrapMaterialDesign();
-    $('.collapse').collapse();
+    $(document).ready(function() {
+      $('body').bootstrapMaterialDesign();
+      $('.collapse').collapse();
+    });
 
     new Chart(document.getElementById("chartjs-0b"), {
       type: 'line',
@@ -52,6 +54,29 @@
         }, {
             label: "Media tempo risposta",
             data: [3, 4, 5, 4, 3, 2, 2, 3],
+            fill: false,
+            lineTension: 0.1
+        }]
+      },
+      options: {}
+    });
+
+    $('body').bootstrapMaterialDesign();
+    $('.collapse').collapse();
+
+    new Chart(document.getElementById("chartjs-gff"), {
+      type: 'line',
+      data: {
+        labels: ["A", "B", "C", "D", "E", "F", "G"],
+        datasets: [{
+            label: "Issues tempo risposta",
+            data: [4, 6, 4, 9, 6, 9, 2, 16],
+            fill: false,
+            borderColor: "grey",
+            lineTension: 0.1
+        }, {
+            label: "Media tempo risposta",
+            data: [3, 42, 1, 12, 12, 2, 23, 3],
             fill: false,
             lineTension: 0.1
         }]

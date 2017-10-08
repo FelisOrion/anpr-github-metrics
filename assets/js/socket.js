@@ -62,3 +62,10 @@ channel.join()
 
 
 export default socket
+
+
+
+$(document).ready(function() {
+  $('body').bootstrapMaterialDesign();
+  $('.collapse').collapse();
+});

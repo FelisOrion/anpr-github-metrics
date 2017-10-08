@@ -8,9 +8,6 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left:30px">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#P1"><i class="icon ion-home"></i></a>
-        </li>
         <li class="nav-item">
           <a class="nav-link" href="#P1">Grafico</a>
         </li>
@@ -23,13 +20,17 @@
         <li class="nav-item">
           <a class="nav-link" href="#P4">Lista</a>
         </li>
-
+        <li class="nav-item">
+          <a class="nav-link" href="#P5">Lista</a>
+        </li>
+        <li class="nav-item">
+          <button id="open_modal_login" class="btn btn-outline-success my-2 my-sm-0" style="margin-left:14px" data-toggle="modal" data-target="#exampleModal">Login</button>
+        </li>
 
       </ul>
       <form class="form-inline my-2 my-lg-0" action="#">
-        <input id="url" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button id="url_btn" class="btn btn-outline-success my-2 my-sm-0" style="margin-left:14px">Search</button>
-        <button id="open_modal_login" class="btn btn-outline-success my-2 my-sm-0" style="margin-left:14px" data-toggle="modal" data-target="#exampleModal">Login</button>
+        <input id="url" class="form-control mr-sm-2" type="text" placeholder="Repository link" aria-label="Search">
+        <input id="url_btn" class="btn btn-outline-success my-2 my-sm-0" style="margin-left:14px" value="Cerca" type="button"/>
       </form>
     </div>
   </div>
