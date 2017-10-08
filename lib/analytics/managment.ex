@@ -65,11 +65,17 @@ defmodule Gitmetrics.Managment  do
           }] end)
     end
 
-    # def calc_media_respons() do
-    #
-    # end
+    def send_close_time([]), do: %{}
+    def send_close_time(list) do
+      list
+      |> Enum.reduce([], fn(x, acc) -> acc ++ [
+        %{number: x.number,
+          time: match_date(x.created_at, x.closed_at),
+        }] end)
+    end
 
-    def send_issues_time([], _, _, _), do: %{issues: []}
+
+    def send_issues_time([], _, _, _), do: %{}
     def send_issues_time(list, org, repo, client) do
       list
       |> Enum.reduce([],

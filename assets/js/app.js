@@ -71,11 +71,16 @@ url_btn.on('click', event => {
     console.log("push");
     channel.push("stato", { url: url.val() });
     channel.push("lista", { url: url.val() });
-    channel.push("resptimed", { url: url.val() });
+    channel.push("resptime", { url: url.val() });
+    channel.push("closetime", { url: url.val() });
     url.val('');
 });
 
-channel.on("resptimed", pl => {
+channel.on("resptime", pl => {
+  console.log(pl);
+});
+
+channel.on("closetime", pl => {
   console.log(pl);
 });
 

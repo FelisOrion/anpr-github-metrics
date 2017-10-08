@@ -24,14 +24,25 @@ defmodule GitmetricsWeb.MetricsChannel do
     {:noreply, socket}
   end
 
-  def handle_in("resptimed", _payload, socket) do
+  def handle_in("resptime", _payload, socket) do
     metrics =
       {"era", "pay"}
       # payload.url
       # |> Managment.init_url
       |> Managment.api_call()
       |> Managment.send_issues_time("era", "pay", Tentacat.Client.new(%{user: "FelisOrion", password: "salaculo21122012"}))
-    push socket, "resptimed", %{list: metrics}
+    push socket, "resptime", %{resp: metrics}
+    {:noreply, socket}
+  end
+
+  def handle_in("closetime", _payload, socket) do
+    metrics =
+      {"era", "pay"}
+      # payload.url
+      # |> Managment.init_url
+      |> Managment.api_call()
+      |> Managment.send_close_time()
+    push socket, "closetime", %{close: metrics}
     {:noreply, socket}
   end
 
