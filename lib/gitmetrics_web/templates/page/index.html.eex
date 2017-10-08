@@ -8,8 +8,10 @@
     <div class="col"></div>
 
     <div class="w-600">
-      <h3>Creazione issues tempo risposta</h3>
-      <p style="max-width:770px">Hello world</p>
+      <h3>Tempo di prima risposta (issues aperte)</h3>
+      <p style="color:#808080;max-width:770px">Tempo di prima risposta per ogni segnalazione (linea blu)
+      <br/>Linea rossa indicato il tempo medio di risposta di tutte le segnalazioni</p>
+
       <canvas
         id="chartjs-0b"
         width="770"
@@ -32,8 +34,12 @@
     <div class="col"></div>
 
     <div class="w-600">
-      <h3>Stato issues</h3>
-      <p style="max-width:770px">Hello world</p>
+      <h3>Stato segnalazioni</h3>
+      <p style="color:#808080;max-width:770px">
+        Le segnalazioni aperte sono di colore verde<br/>
+        Le segnalazioni chiuse sono di colore rosso
+      </p>
+
       <canvas
         id="chartjs-4b"
         width="770"
@@ -58,8 +64,12 @@
     <div class="col"></div>
 
     <div class="w-600">
-      <h3>ADA</h3>
-      <p style="max-width:770px">Hello world</p>
+      <h3>Tipologie di segnalazioni</h3>
+      <p style="color:#808080;max-width:770px">
+        Le segnalazione non commentate sono di colore XXXXX<br/>
+        Le segnalazione aperte senza etichette sono di colore XXXXX<br/>
+        Le segnalazione chiuse senza commenti sono di colore XXXXX</p>
+
       <canvas
         id="chartjs-7b"
         width="770"
@@ -84,8 +94,9 @@
     <div class="col"></div>
 
     <div class="w-600">
-      <h3>Creazione issues tempo risposta</h3>
-      <p style="max-width:770px">Hello world</p>
+      <h3>Tempo di prima risposta (issues chiuse)</h3>
+      <p style="color:#808080;max-width:770px">Tempo di prima risposta per ogni segnalazione (linea blu)
+      <br/>Linea rossa indicato il tempo medio di risposta di tutte le segnalazioni chiuse</p>
       <canvas
         id="chartjs-gff"
         width="770"
@@ -109,8 +120,8 @@
     <div class="col"></div>
 
     <div class="w-600">
-      <h3>ADA</h3>
-      <p style="max-width:770px">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <h3>Lista segnalazioni aperte</h3>
+      <p style="width:770px"></p>
 
       <table class="table table-hover" style="max-width:770px;text-align:center">
         <thead>

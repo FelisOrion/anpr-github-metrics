@@ -208,6 +208,9 @@ channel.on("info", pl => {
 channel.on("stato", pl => {
   console.log('STATO', pl);
 
+  $('body').bootstrapMaterialDesign();
+  $('.collapse').collapse();
+
   new Chart(document.getElementById("chartjs-4b"), {
       type: "doughnut",
       data: {
@@ -260,6 +263,7 @@ channel.on("lista", pl => {
 
       if(issue.body.length > 200) {
         issue.body = issue.body.slice(0, 200) + '...';
+        issue.body = $(issue.body).text();
       }
 
       html += "<td data-toggle='tooltip' title='"+issue.body+"'>";
