@@ -14,7 +14,20 @@ defmodule Gitmetrics.Managment  do
     end
 
     #restituisce nome repository e organizzazione
+    defp get_names(["" | [repo | [ org | tail]]]), do: {org, repo}
     defp get_names([repo | [ org | _tail ]]), do: {org, repo} #repo | organizazione
+
+    def api_call({org, repo}, client) do
+       with {:ok, list} <- Cache.pull(org, repo, Tentacat.Client.new(client)) do
+          list
+          |> Flow.from_enumerable()
+          |> Flow.partition()
+          |> Flow.reduce(fn -> [] end, fn(x, acc) -> acc ++ [get_data(x)] end)
+          |> Enum.sort()
+       else
+         _ -> []
+       end
+    end
 
     def api_call({org, repo}) do
        with {:ok, list} <- Cache.pull(org, repo) do
@@ -92,12 +105,23 @@ defmodule Gitmetrics.Managment  do
 
 
     def send_issues_time([], _, _, _), do: %{}
-    def send_issues_time(list, org, repo, client) do
+
+    def send_issues_time(list, {org, repo}, client) do
       list
       |> Enum.reduce([],
           fn(x, acc) -> acc ++ [%{number: x.number,
           time: match_date(x.created_at, get_comments(org, repo, x.comments, x.number, x.created_at, client))
           }] end)
+      |> save_in_cache(org, repo)
+    end
+
+    def send_issues_time(list, {org, repo}) do
+      list
+      |> Enum.reduce([],
+          fn(x, acc) -> acc ++ [%{number: x.number,
+          time: match_date(x.created_at, get_comments(org, repo, x.comments, x.number, x.created_at))
+          }] end)
+      |> save_in_cache(org, repo)
     end
 
     defp get_comments(_, _, 0, _, _, _), do: 0
@@ -106,6 +130,18 @@ defmodule Gitmetrics.Managment  do
         |> can_i_send?()
         |> get_first_commet()
         |> Map.get("created_at")
+    end
+
+    defp get_comments(org, repo, comments, number, created_at) do
+        Comments.filter(org, repo, number, since: created_at)
+        |> can_i_send?()
+        |> get_first_commet()
+        |> Map.get("created_at")
+    end
+
+    defp save_in_cache(list, org, repo) do
+      Cache.push("#{org}/#{repo}/resptime", list)
+      list #ritorno lista
     end
 
     defp match_date(issue, comment) do
@@ -128,6 +164,7 @@ defmodule Gitmetrics.Managment  do
       %{issues: list}
     end
 
+    def can_i_send?({401, _}), do: {:error, :bad_credintial}
     def can_i_send?({403, _}), do: {:error, :limit}
     def can_i_send?({404, _}), do: {:error, :not_found}
     def can_i_send?(list), do: {:ok, list}

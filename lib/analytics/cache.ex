@@ -9,7 +9,7 @@ defmodule Gitmetrics.Cache do
   #Push notification caching function
   #just get from cache if get error set inside cache otherwise just update.
 
-  defp push(repo, value) do
+  def push(repo, value) do
     case Cachex.get(:cache, repo) do
       {:missing, nil } ->
           Cachex.set(:cache, repo, value)
@@ -21,7 +21,15 @@ defmodule Gitmetrics.Cache do
   end
 
   def update(org, repo, client) do
-    with {:ok, list} <- Tentacat.Issues.filter(org, repo, %{state: "all"}, client) |> Managment.can_i_send? do
+    with {:ok, list} <- Tentacat.Issues.filter(org, repo, %{state: "all"}, client)
+                        |> Managment.can_i_send? do
+      push("#{org}/#{repo}", list)
+    end
+  end
+
+  def update(org, repo) do
+    with {:ok, list} <- Tentacat.Issues.filter(org, repo, %{state: "all"})
+                        |> Managment.can_i_send? do
       push("#{org}/#{repo}", list)
     end
   end
@@ -29,12 +37,19 @@ defmodule Gitmetrics.Cache do
   @doc """
   Just get list from cache and return {:ok, list} | {:missing, nil}
   """
+  def pull(org, repo, client) do
+    with {:ok, list} <- Cachex.get(:cache, "#{org}/#{repo}") do
+      {:ok, list}
+    else
+      _ ->  update(org, repo, client)
+    end
+  end
+
   def pull(org, repo) do
     with {:ok, list} <- Cachex.get(:cache, "#{org}/#{repo}") do
       {:ok, list}
     else
-      _ ->  auth = Tentacat.Client.new(%{user: "FelisOrion", password: "salaculo21122012"})
-            update(org, repo, auth)
+      _ ->  update(org, repo)
     end
   end
 
