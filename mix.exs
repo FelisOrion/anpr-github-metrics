@@ -10,8 +10,13 @@ defmodule Gitmetrics.Mixfile do
       compilers: [:phoenix, :gettext] ++ Mix.compilers,
       start_permanent: Mix.env == :prod,
       aliases: aliases(),
-      deps: deps()
-    ]
+      deps: deps(),
+      # Docs
+      name: "Gitmetrics",
+      source_url: "https://github.com/FelisOrion/anpr-github-metrics",
+      docs: [main: "README.md", # The main page in the docs
+          logo: "assets/static/images/logo.jpg",
+          extras: ["README.md"]]]
   end
 
   # Configuration for the OTP application.
@@ -37,6 +42,7 @@ defmodule Gitmetrics.Mixfile do
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 3.2"},
       {:tentacat, "~> 0.5"},
+      {:ex_doc, "~> 0.16", only: :dev, runtime: false},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 2.10"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
