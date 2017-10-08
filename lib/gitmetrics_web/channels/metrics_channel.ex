@@ -70,12 +70,12 @@ defmodule GitmetricsWeb.MetricsChannel do
   end
 
   defp send_issues_time_auth?(list, payload) do
-    if payload["user"] && payload["password"] == "" do
+    if payload["name"] && payload["password"] == "" do
       list
       |> Managment.send_issues_time(Managment.init_url(payload["url"]))
     else
       list
-      |> Managment.send_issues_time(Managment.init_url(payload["url"]), %{user: payload["user"], password: payload["password"]})
+      |> Managment.send_issues_time(Managment.init_url(payload["url"]), %{user: payload["name"], password: payload["password"]})
     end
   end
   # It is also common to receive messages from the client and
@@ -83,10 +83,10 @@ defmodule GitmetricsWeb.MetricsChannel do
 
   # Add authorization logic here as required.
   defp authorized?(url, payload) do
-    if payload["user"] && payload["password"] == "" do
+    if payload["name"] == "" || payload["password"] == "" do
       Managment.api_call(url)
     else
-      Managment.api_call(url, %{user: payload["user"], password: payload["password"]})
+      Managment.api_call(url, %{user: payload["name"], password: payload["password"]})
     end
   end
 

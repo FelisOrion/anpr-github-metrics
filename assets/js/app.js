@@ -65,6 +65,9 @@ url.on('keypress', event => {
     console.log("push");
     channel.push("stato", { url: url.val(), name: name.val(), password: password.val()});
     channel.push("lista", { url: url.val(), name: name.val(), password: password.val()});
+    channel.push("resptime", { url: url.val(), name: name.val(), password: password.val()});
+    channel.push("closetime", { url: url.val(), name: name.val(), password: password.val()});
+    channel.push("info", {url: url.val(), name: name.val(), password: password.val()});
   }
 });
 

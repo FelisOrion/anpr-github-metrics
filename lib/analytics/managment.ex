@@ -14,6 +14,7 @@ defmodule Gitmetrics.Managment  do
     end
 
     #restituisce nome repository e organizzazione
+    defp get_names([""]), do: []
     defp get_names(["" | [repo | [ org | tail]]]), do: {org, repo}
     defp get_names([repo | [ org | _tail ]]), do: {org, repo} #repo | organizazione
 
@@ -80,6 +81,7 @@ defmodule Gitmetrics.Managment  do
 
     def send_close_time([]), do: %{}
     def send_close_time(list) do
+      IO.inspect("timeeeeeeee")
       list
       |> Enum.reduce([], fn(x, acc) -> acc ++ [
         %{number: x.number,
@@ -89,6 +91,7 @@ defmodule Gitmetrics.Managment  do
 
     def send_info_status([]), do: %{close_no_comments: 0, no_commentate: 0, no_labele: 0}
     def send_info_status(list) do
+      IO.inspect("awdwawd")
       %{
         close_no_comments: Enum.reduce(list, 0, fn(x, acc) -> acc + count_items(x.state, x.comments) end),
         no_commentate: Enum.reduce(list, 0, fn(x, acc) -> acc + count_items(x.comments) end),
@@ -132,7 +135,9 @@ defmodule Gitmetrics.Managment  do
         |> Map.get("created_at")
     end
 
+    defp get_comments(_, _, 0, _, _), do: 0
     defp get_comments(org, repo, comments, number, created_at) do
+        IO.inspect("get commmenenenenene")
         Comments.filter(org, repo, number, since: created_at)
         |> can_i_send?()
         |> get_first_commet()

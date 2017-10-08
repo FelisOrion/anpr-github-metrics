@@ -41,7 +41,7 @@ defmodule Gitmetrics.Cache do
     with {:ok, list} <- Cachex.get(:cache, "#{org}/#{repo}") do
       {:ok, list}
     else
-      _ ->  update(org, repo, client)
+      _ -> update(org, repo, client)
     end
   end
 
@@ -49,7 +49,7 @@ defmodule Gitmetrics.Cache do
     with {:ok, list} <- Cachex.get(:cache, "#{org}/#{repo}") do
       {:ok, list}
     else
-      _ ->  update(org, repo)
+      _ -> update(org, repo)
     end
   end
 
