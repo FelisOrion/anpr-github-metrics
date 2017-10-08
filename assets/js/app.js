@@ -77,10 +77,51 @@ url_btn.on('click', event => {
     url.val('');
 });
 
-channel.on("resptime", pl => {
-  console.log(pl);
-});
 
+/**
+ * Questa funzione intercetta i dati che servono per i grafici e li imposta
+ */
+channel.on("resptime", pl => {
+    console.log("resptime", pl);
+    var onlyOpen = [];
+    var tmp1 = {};
+    var tmp2 = 1;
+    var totTime = 0;
+    var rangeOpen = [];
+
+    for(var i in pl.list) {
+      tmp1 = pl.list[i];
+
+      if(tmp1.time) {
+        onlyOpen.push(tmp1.time);
+        rangeOpen.push("IS " + tmp2++);
+      };
+
+      totTime += tmp1.time;
+    };
+
+    media = totTime / pl.list.length;
+
+    new Chart(document.getElementById("chartjs-0b"), {
+      type: 'line',
+      data: {
+        labels: rangeOpen,
+        datasets: [{
+            label: "Issues tempo risposta",
+            data: onlyOpen,
+            fill: false,
+            borderColor: "rgb(54, 162, 235)",
+            lineTension: 0.1
+        }, {
+            label: "Media tempo risposta",
+            data: [media],
+            fill: false,
+            lineTension: 0.1
+        }]
+      },
+      options: {}
+    });
+});
 channel.on("closetime", pl => {
   console.log(pl);
 });
@@ -89,6 +130,10 @@ channel.on("info", pl => {
   console.log(pl);
 });
 
+
+/**
+ * Questa funzione intercetta i dati che servono per i grafici e li imposta
+ */
 channel.on("stato", pl => {
   console.log('STATO', pl);
 
@@ -105,29 +150,11 @@ channel.on("stato", pl => {
   });
 });
 
+/**
+ * Questa funzione intercetta la lista e visualizza la lista di issues
+ */
 channel.on("lista", pl => {
-console.log('LISTA', pl);
-
-  new Chart(document.getElementById("chartjs-0b"), {
-    type: 'line',
-    data: {
-      labels: ["A", "B", "C", "D", "E", "F", "G"],
-      datasets: [{
-          label: "Issues tempo risposta",
-          data: [0, 3, 4, 1, 6, 9, 2, 10],
-          fill: false,
-          borderColor: "grey",
-          lineTension: 0.1
-      }, {
-          label: "Media tempo risposta",
-          data: [3, 4, 5, 4, 3, 2, 2, 3],
-          fill: false,
-          lineTension: 0.1
-      }]
-    },
-    options: {}
-  });
-
+  console.log('LISTA', pl);
 });
 
 channel.join()

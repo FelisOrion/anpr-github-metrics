@@ -21,9 +21,9 @@
           <a class="nav-link" href="#P3">Lista</a>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
+      <form class="form-inline my-2 my-lg-0" action="?">
         <input id="url" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button id="url_btn" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <button id="url_btn" class="btn btn-outline-success my-2 my-sm-0">Search</button>
       </form>
     </div>
   </div>
