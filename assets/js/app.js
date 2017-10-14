@@ -7,83 +7,56 @@ import {Socket} from "phoenix"
 
 let socket = new Socket("/socket", {params: {token: window.userToken}})
 
-// When you connect, you'll often need to authenticate the client.
-// For example, imagine you have an authentication plug, `MyAuth`,
-// which authenticates the session and assigns a `:current_user`.
-// If the current user exists you can assign the user's token in
-// the connection for use in the layout.
-//
-// In your "lib/web/router.ex":
-//
-//     pipeline :browser do
-//       ...
-//       plug MyAuth
-//       plug :put_user_token
-//     end
-//
-//     defp put_user_token(conn, _) do
-//       if current_user = conn.assigns[:current_user] do
-//         token = Phoenix.Token.sign(conn, "user socket", current_user.id)
-//         assign(conn, :user_token, token)
-//       else
-//         conn
-//       end
-//     end
-//
-// Now you need to pass this token to JavaScript. You can do so
-// inside a script tag in "lib/web/templates/layout/app.html.eex":
-//
-//     <script>window.userToken = "<%= assigns[:user_token] %>";</script>
-//
-// You will need to verify the user token in the "connect/2" function
-// in "lib/web/channels/user_socket.ex":
-//
-//     def connect(%{"token" => token}, socket) do
-//       # max_age: 1209600 is equivalent to two weeks in seconds
-//       case Phoenix.Token.verify(socket, "user socket", token, max_age: 1209600) do
-//         {:ok, user_id} ->
-//           {:ok, assign(socket, :user, user_id)}
-//         {:error, reason} ->
-//           :error
-//       end
-//     end
-//
-// Finally, pass the token on connect as below. Or remove it
-// from connect if you don't care about authentication.
-
 socket.connect()
 
-// Now that you are connected, you can join channels with a topic:
 let channel = socket.channel("metrics:lobby", {})
+
+channel.join()
+  .receive("ok", resp => { console.log("Joined successfully", resp) })
+  .receive("error", resp => { console.log("Unable to join", resp) })
+
+// Instanzio tutte le variabili che mi servono
+let url_btn = $('#url_btn');
 let url = $('#url');
 let login_btn = $('#login-btn');
 let name = $('#exampleInputEmail1');
 let password = $('#exampleInputPassword1');
+let defaultUrl = "https://github.com/italia/anpr";
 
+// Funzione che richiede tramite socket varie informazioni al server
+var channelsPush = function() {
+    var tmpUrl = defaultUrl;
+
+    if(url.val())
+        tmpUrl = url.val();
+
+    console.log("PUSH INIT: ", tmpUrl);
+
+    channel.push("stato", { url: tmpUrl, name: name.val(), password: password.val()});
+    channel.push("info", {url: tmpUrl, name: name.val(), password: password.val()});
+    channel.push("closetime", { url: tmpUrl, name: name.val(), password: password.val()});
+    channel.push("resptime", { url: tmpUrl, name: name.val(), password: password.val()});
+    channel.push("lista", { url: tmpUrl, name: name.val(), password: password.val()});
+
+    console.log("PUSH FINISH");
+}
+
+// Fai un push ad inizio pagina
+channelsPush();
+
+// Intercetta eventi di cambio url repository
 url.on('keypress', event => {
-  if (event.keyCode == 13) {
-    console.log("push");
-    channel.push("stato", { url: url.val(), name: name.val(), password: password.val()});
-    channel.push("lista", { url: url.val(), name: name.val(), password: password.val()});
-    channel.push("resptime", { url: url.val(), name: name.val(), password: password.val()});
-    channel.push("closetime", { url: url.val(), name: name.val(), password: password.val()});
-    channel.push("info", {url: url.val(), name: name.val(), password: password.val()});
-  }
+    if(event.keyCode == 13) {
+        channelsPush();
+    }
 });
-
-let url_btn = $('#url_btn');
-
 url_btn.on('click', event => {
-    console.log("push");
-
-    channel.push("stato", { url: url.val(), name: name.val(), password: password.val()});
-    channel.push("lista", { url: url.val(), name: name.val(), password: password.val()});
-    channel.push("resptime", { url: url.val(), name: name.val(), password: password.val()});
-    channel.push("closetime", { url: url.val(), name: name.val(), password: password.val()});
-    channel.push("info", {url: url.val(), name: name.val(), password: password.val()});
+    channelsPush();
     url.val('');
 });
-
+window.setDescr = function(el) {
+    console.log('ELEMENT', el);
+};
 
 /**
  * Questa funzione intercetta i dati che servono per i grafici e li imposta
@@ -188,14 +161,16 @@ channel.on("closetime", pl => {
 });
 
 channel.on("info", pl => {
+    console.log('CHANNEL GET PUSH: INFO', pl);
+
   new Chart(document.getElementById("chartjs-7b"), {
       type: "doughnut",
       data: {
-          labels: ["Chiuse senza commenti", "Senza commenti"],
+          labels: ["Chiuse senza commenti", "Senza commenti", "Senza etichette"],
           datasets: [{
               label: "Issues",
-              data: [pl.aperte, pl.chiuse],
-              backgroundColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"]
+              data: [pl.close_no_comments, pl.no_commentate, pl.no_labele],
+              backgroundColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(255,255,0)"]
           }]
       }
   });
@@ -265,8 +240,8 @@ channel.on("lista", pl => {
         issue.body = issue.body.slice(0, 200) + '...';
       }
 
-      html += "<td data-toggle='tooltip' title='"+issue.body+"'>";
-      html +=  btn.icon('ion-document-text') + "</td>";
+      //html += "<td data-toggle=\"modal\" data-target=\"#modalIssueGithub\" data-descr=\""+issue.descr+"\" onclick='window.setDescr(this)'>";
+      //html +=  btn.icon('ion-document-text') + "</td>";
 
       YYYY = moment(issue.created_at).year();
       MM = moment(issue.created_at).month();
@@ -298,11 +273,6 @@ channel.on("lista", pl => {
 
   console.log('LISTA', pl);
 });
-
-channel.join()
-  .receive("ok", resp => { console.log("Joined successfully", resp) })
-  .receive("error", resp => { console.log("Unable to join", resp) })
-
 
 export default socket
 

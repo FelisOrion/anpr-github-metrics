@@ -20,7 +20,7 @@
     </main>
 
     <main role="modal">
-      <%= render @view_module, "login.html", assigns %>
+      <%= render @view_module, "modals.html", assigns %>
     </main>
 
     <!--<p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
@@ -100,7 +100,7 @@
     new Chart(document.getElementById("chartjs-7b"), {
         type: "doughnut",
         data: {
-            labels: ["T1", "T2", "T3"],
+            labels: ["Chiuse senza commenti", "Senza commenti", "Senza etichette"],
             datasets: [{
                 label: "Issues",
                 data: [7 , 3, 5],
