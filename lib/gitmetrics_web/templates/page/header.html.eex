@@ -6,7 +6,7 @@
     <div class="navbar-collapse" id="navbarSupportedContent" style="margin-left:30px" >
       <ul  style="flex-direction: unset;" class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a href="/auth/github/callback"><button id="open_modal_login" class="btn btn-outline-success my-2 my-sm-0" style="margin-left:14px">Login</button></a>
+            <a href="https://vkbjzpourv.localtunnel.me/auth/github/callback"><button id="open_modal_login" class="btn btn-outline-success my-2 my-sm-0" style="margin-left:14px">Login</button></a>
           </li>
 
           <!-- data-toggle="modal" data-target="#exampleModal" !-->

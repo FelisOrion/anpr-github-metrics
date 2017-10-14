@@ -140,7 +140,7 @@ channel.on("resptime", pl => {
     });
 });
 
-channel.on("authentication", function(user) {
+channel.on("authentication", user => {
     console.log('CHANNEL GET PUSH:', user);
 });
 
