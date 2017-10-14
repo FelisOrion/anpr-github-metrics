@@ -64,7 +64,7 @@
       style="width: 770px; height: 385px"
       ></canvas>
 
-      <div style="width: 770px; height: 385px" id="loading-4b" >
+      <div style="width: 770px; height: 385px  ;padding: 120px" id="loading-4b" >
           <div class="sk-circle">
               <div class="sk-circle1 sk-child"></div>
               <div class="sk-circle2 sk-child"></div>
@@ -111,7 +111,7 @@
         style="width: 770px; height: 385px"
       ></canvas>
 
-      <div style="width: 770px; height: 385px" id="loading-7b" >
+      <div style="width: 770px; height: 385px ;padding: 120px" id="loading-7b" >
           <div class="sk-circle">
               <div class="sk-circle1 sk-child"></div>
               <div class="sk-circle2 sk-child"></div>
@@ -155,7 +155,7 @@
         style="width: 770px; height: 385px"
       ></canvas>
 
-      <div style="width: 770px; height: 385px" id="loading-gff" >
+      <div style="width: 770px; height: 385px ;padding: 120px" id="loading-gff" >
           <div class="sk-circle">
               <div class="sk-circle1 sk-child"></div>
               <div class="sk-circle2 sk-child"></div>

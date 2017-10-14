@@ -91,6 +91,9 @@ channel.on("resptime", pl => {
         tmp1 = pl.resp[i];
 
         if(tmp1.time) {
+
+            console.log(tmp1.time);
+
             onlyOpen.push(Math.round(tmp1.time / 60));
             rangeOpen.push("IS " + tmp2++);
         }
@@ -306,6 +309,6 @@ export default socket
 
 
 $(document).ready(function() {
-    $('body').bootstrapMaterialDesign();
+    $(document).bootstrapMaterialDesign();
     $('.collapse').collapse();
 });
