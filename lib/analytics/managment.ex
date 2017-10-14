@@ -179,9 +179,9 @@ defmodule Gitmetrics.Managment  do
 
 
     #pattern match per restituire prima commento se lo trova
-    defp get_first_commet([]), do: 0
+    defp get_first_commet([]), do: %{}
     defp get_first_commet({:ok, [ h | _t]}), do: h
-    defp get_first_commet({:error, _}), do: 0
+    defp get_first_commet({:error, _}), do: %{}
     defp get_first_commet([ h | _t]), do: h
 
     @doc """
