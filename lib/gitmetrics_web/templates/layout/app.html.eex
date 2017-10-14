@@ -20,7 +20,7 @@
     </main>
 
     <main role="modal">
-      <%= render @view_module, "login.html", assigns %>
+      <%= render @view_module, "modals.html", assigns %>
     </main>
 
     <!--<p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
@@ -40,74 +40,79 @@
       $('body').bootstrapMaterialDesign();
       $('.collapse').collapse();
     });
-
-    new Chart(document.getElementById("chartjs-0b"), {
-      type: 'line',
-      data: {
-        labels: ["A", "B", "C", "D", "E", "F", "G"],
-        datasets: [{
-            label: "Issues tempo risposta",
-            data: [0, 3, 4, 1, 6, 9, 2, 10],
-            fill: false,
-            borderColor: "grey",
-            lineTension: 0.1
-        }, {
-            label: "Media tempo risposta",
-            data: [3, 4, 5, 4, 3, 2, 2, 3],
-            fill: false,
-            lineTension: 0.1
-        }]
-      },
-      options: {}
-    });
+    //
+    // new Chart(document.getElementById("chartjs-0b"), {
+    //   type: 'line',
+    //   data: {
+    //     labels: ["A", "B", "C", "D", "E", "F", "G"],
+    //     datasets: [{
+    //         label: "Issues tempo risposta",
+    //         data: [0, 3, 4, 1, 6, 9, 2, 10],
+    //         fill: false,
+    //         borderColor: "grey",
+    //         lineTension: 0.1
+    //     }, {
+    //         label: "Media tempo risposta",
+    //         data: [3, 4, 5, 4, 3, 2, 2, 3],
+    //         fill: false,
+    //         lineTension: 0.1
+    //     }]
+    //   },
+    //   options: {}
+    // });
 
     $('body').bootstrapMaterialDesign();
     $('.collapse').collapse();
     $('[data-toggle="tooltip"]').tooltip();
 
-    new Chart(document.getElementById("chartjs-gff"), {
-      type: 'line',
-      data: {
-        labels: ["A", "B", "C", "D", "E", "F", "G"],
-        datasets: [{
-            label: "Issues tempo risposta",
-            data: [4, 6, 4, 9, 6, 9, 2, 16],
-            fill: false,
-            borderColor: "grey",
-            lineTension: 0.1
-        }, {
-            label: "Media tempo risposta",
-            data: [3, 42, 1, 12, 12, 2, 23, 3],
-            fill: false,
-            lineTension: 0.1
-        }]
-      },
-      options: {}
-    });
+    // new Chart(document.getElementById("chartjs-gff"), {
+    //   type: 'line',
+    //   data: {
+    //     labels: ["A", "B", "C", "D", "E", "F", "G"],
+    //     datasets: [{
+    //         label: "Issues tempo risposta",
+    //         data: [4, 6, 4, 9, 6, 9, 2, 16],
+    //         fill: false,
+    //         borderColor: "grey",
+    //         lineTension: 0.1
+    //     }, {
+    //         label: "Media tempo risposta",
+    //         data: [3, 42, 1, 12, 12, 2, 23, 3],
+    //         fill: false,
+    //         lineTension: 0.1
+    //     }]
+    //   },
+    //   options: {}
+    // });
+    //
+    // new Chart(document.getElementById("chartjs-4b"), {
+    //     type: "doughnut",
+    //     data: {
+    //         labels: ["Aperte", "Chiuse"],
+    //         datasets: [{
+    //             label: "Issues",
+    //             data: [3 , 6],
+    //             backgroundColor: ["grey"]
+    //         }]
+    //     }
+    // });
+    //
+    // new Chart(document.getElementById("chartjs-7b"), {
+    //     type: "doughnut",
+    //     data: {
+    //         labels: ["Chiuse senza commenti", "Senza commenti", "Senza etichette"],
+    //         datasets: [{
+    //             label: "Issues",
+    //             data: [7 , 3, 5],
+    //             backgroundColor: ["grey", "black"]
+    //         }]
+    //     }
+    // });
 
-    new Chart(document.getElementById("chartjs-4b"), {
-        type: "doughnut",
-        data: {
-            labels: ["Aperte", "Chiuse"],
-            datasets: [{
-                label: "Issues",
-                data: [3 , 6],
-                backgroundColor: ["grey"]
-            }]
-        }
-    });
-
-    new Chart(document.getElementById("chartjs-7b"), {
-        type: "doughnut",
-        data: {
-            labels: ["T1", "T2", "T3"],
-            datasets: [{
-                label: "Issues",
-                data: [7 , 3, 5],
-                backgroundColor: ["grey", "black"]
-            }]
-        }
-    });
+    $("#chartjs-7b").hide();
+    $("#chartjs-gff").hide();
+    $("#chartjs-0b").hide();
+    $("#chartjs-4b").hide();
 
     </script>
   </body>

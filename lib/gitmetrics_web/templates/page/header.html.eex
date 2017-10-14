@@ -8,20 +8,20 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left:30px">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item" data-toggle="tooltip" title="TEST">
-          <a class="nav-link" href="#P1">PRA</a>
+        <li class="nav-item" data-toggle="tooltip" title="Tempo di prima risposta (segnalazioni aperte)">
+          <a class="nav-link" href="#P1">G1</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#P2">SS </a>
+        <li class="nav-item" data-toggle="tooltip" title="Stato segnalazioni">
+          <a class="nav-link" href="#P2">G2</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#P3">TS</a>
+        <li class="nav-item" data-toggle="tooltip" title="Tipologie di segnalazioni">
+          <a class="nav-link" href="#P3">G3</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#P4">PRC</a>
+        <li class="nav-item" data-toggle="tooltip" title="Tempo di prima risposta (segnalazioni chiuse)">
+          <a class="nav-link" href="#P4">G4</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#P5">LSA</a>
+        <li class="nav-item" data-toggle="tooltip" title="Lista segnalazioni aperte">
+          <a class="nav-link" href="#P5">LISTA</a>
         </li>
         <li class="nav-item">
           <button id="open_modal_login" class="btn btn-outline-success my-2 my-sm-0" style="margin-left:14px" data-toggle="modal" data-target="#exampleModal">Login</button>
