@@ -8,7 +8,7 @@
     <div class="col"></div>
 
     <div class="w-600">
-      <h3>Tempo di prima risposta (issues aperte)</h3>
+      <h3>Tempo di prima risposta (segnalazioni aperte)</h3>
       <p style="color:#808080;max-width:770px">Tempo di prima risposta per ogni segnalazione (linea blu)
       <br/>Linea rossa indicato il tempo medio di risposta di tutte le segnalazioni</p>
 
@@ -66,9 +66,9 @@
     <div class="w-600">
       <h3>Tipologie di segnalazioni</h3>
       <p style="color:#808080;max-width:770px">
-        Le segnalazione non commentate sono di colore XXXXX<br/>
-        Le segnalazione aperte senza etichette sono di colore XXXXX<br/>
-        Le segnalazione chiuse senza commenti sono di colore XXXXX</p>
+        Le segnalazione non commentate sono di colore rosso<br/>
+        Le segnalazione aperte senza etichette sono di colore blu<br/>
+        Le segnalazione chiuse senza commenti sono di colore giallo</p>
 
       <canvas
         id="chartjs-7b"
@@ -94,7 +94,7 @@
     <div class="col"></div>
 
     <div class="w-600">
-      <h3>Tempo di prima risposta (issues chiuse)</h3>
+      <h3>Tempo di prima risposta (segnalazioni chiuse)</h3>
       <p style="color:#808080;max-width:770px">Tempo di prima risposta per ogni segnalazione (linea blu)
       <br/>Linea rossa indicato il tempo medio di risposta di tutte le segnalazioni chiuse</p>
       <canvas

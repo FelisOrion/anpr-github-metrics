@@ -12,8 +12,8 @@ socket.connect()
 let channel = socket.channel("metrics:lobby", {})
 
 channel.join()
-  .receive("ok", resp => { console.log("Joined successfully", resp) })
-  .receive("error", resp => { console.log("Unable to join", resp) })
+.receive("ok", resp => { console.log("Joined successfully", resp) })
+.receive("error", resp => { console.log("Unable to join", resp) })
 
 // Instanzio tutte le variabili che mi servono
 let url_btn = $('#url_btn');
@@ -28,7 +28,7 @@ var channelsPush = function() {
     var tmpUrl = defaultUrl;
 
     if(url.val())
-        tmpUrl = url.val();
+    tmpUrl = url.val();
 
     console.log("PUSH INIT: ", tmpUrl);
 
@@ -39,7 +39,7 @@ var channelsPush = function() {
     channel.push("lista", { url: tmpUrl, name: name.val(), password: password.val()});
 
     console.log("PUSH FINISH");
-}
+};
 
 // Fai un push ad inizio pagina
 channelsPush();
@@ -59,8 +59,8 @@ window.setDescr = function(el) {
 };
 
 /**
- * Questa funzione intercetta i dati che servono per i grafici e li imposta
- */
+* Questa funzione intercetta i dati che servono per i grafici e li imposta
+*/
 channel.on("resptime", pl => {
     console.log("resptime", pl);
 
@@ -71,14 +71,14 @@ channel.on("resptime", pl => {
     var rangeOpen = [];
 
     for(var i in pl.resp) {
-      tmp1 = pl.resp[i];
+        tmp1 = pl.resp[i];
 
-      if(tmp1.time) {
-        onlyOpen.push(Math.round(tmp1.time / 60));
-        rangeOpen.push("IS " + tmp2++);
-      };
+        if(tmp1.time) {
+            onlyOpen.push(Math.round(tmp1.time / 60));
+            rangeOpen.push("IS " + tmp2++);
+        };
 
-      totTime += Math.round(tmp1.time / 60);
+        totTime += Math.round(tmp1.time / 60);
     };
 
     var nMedia = 0;
@@ -86,198 +86,198 @@ channel.on("resptime", pl => {
 
     var aMedia = [];
     for(var b in onlyOpen) {
-      aMedia.push(nMedia);
+        aMedia.push(nMedia);
     };
 
     new Chart(document.getElementById("chartjs-0b"), {
-      type: 'line',
-      data: {
-        labels: rangeOpen,
-        datasets: [{
-            label: "Issues tempo risposta",
-            data: onlyOpen,
-            fill: false,
-            borderColor: "rgb(54, 162, 235)",
-            lineTension: 0.1
-        }, {
-            label: "Media tempo risposta",
-            data: aMedia,
-            fill: false,
-            borderColor: "rgb(255, 99, 132)",
-            lineTension: 0.1
-        }]
-      },
-      options: {}
+        type: 'line',
+        data: {
+            labels: rangeOpen,
+            datasets: [{
+                label: "Issues tempo risposta",
+                data: onlyOpen,
+                fill: false,
+                borderColor: "rgb(54, 162, 235)",
+                lineTension: 0.1
+            }, {
+                label: "Media tempo risposta",
+                data: aMedia,
+                fill: false,
+                borderColor: "rgb(255, 99, 132)",
+                lineTension: 0.1
+            }]
+        },
+        options: {}
     });
 });
 channel.on("closetime", pl => {
-  console.log('closetime', pl);
+    console.log('closetime', pl);
 
-  var onlyClose = [];
-  var tmp1 = {};
-  var tmp2 = 1;
-  var totTime = 0;
-  var rangeClose = [];
+    var onlyClose = [];
+    var tmp1 = {};
+    var tmp2 = 1;
+    var totTime = 0;
+    var rangeClose = [];
 
-  for(var i in pl.close) {
-    tmp1 = pl.close[i];
+    for(var i in pl.close) {
+        tmp1 = pl.close[i];
 
-    if(tmp1.time) {
-      onlyClose.push(Math.round(tmp1.time / 60));
-      rangeClose.push("IS " + tmp2++);
+        if(tmp1.time) {
+            onlyClose.push(Math.round(tmp1.time / 60));
+            rangeClose.push("IS " + tmp2++);
+        };
+
+        totTime += Math.round(tmp1.time / 60);
     };
 
-    totTime += Math.round(tmp1.time / 60);
-  };
+    var nMedia = 0;
+    nMedia = Math.round(totTime / pl.close.length);
 
-  var nMedia = 0;
-  nMedia = Math.round(totTime / pl.close.length);
+    var aMedia = [];
+    for(var b in onlyClose) {
+        aMedia.push(nMedia);
+    };
 
-  var aMedia = [];
-  for(var b in onlyClose) {
-    aMedia.push(nMedia);
-  };
-
-  new Chart(document.getElementById("chartjs-gff"), {
-    type: 'line',
-    data: {
-      labels: rangeClose,
-      datasets: [{
-          label: "Issues tempo risposta",
-          data: onlyClose,
-          fill: false,
-          borderColor: "rgb(54, 162, 235)",
-          lineTension: 0.1
-      }, {
-          label: "Media tempo risposta",
-          data: aMedia,
-          fill: false,
-          borderColor: "rgb(255, 99, 132)",
-          lineTension: 0.1
-      }]
-    },
-    options: {}
-  });
+    new Chart(document.getElementById("chartjs-gff"), {
+        type: 'line',
+        data: {
+            labels: rangeClose,
+            datasets: [{
+                label: "Issues tempo risposta",
+                data: onlyClose,
+                fill: false,
+                borderColor: "rgb(54, 162, 235)",
+                lineTension: 0.1
+            }, {
+                label: "Media tempo risposta",
+                data: aMedia,
+                fill: false,
+                borderColor: "rgb(255, 99, 132)",
+                lineTension: 0.1
+            }]
+        },
+        options: {}
+    });
 });
 
 channel.on("info", pl => {
     console.log('CHANNEL GET PUSH: INFO', pl);
 
-  new Chart(document.getElementById("chartjs-7b"), {
-      type: "doughnut",
-      data: {
-          labels: ["Chiuse senza commenti", "Senza commenti", "Senza etichette"],
-          datasets: [{
-              label: "Issues",
-              data: [pl.close_no_comments, pl.no_commentate, pl.no_labele],
-              backgroundColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(255,255,0)"]
-          }]
-      }
-  });
+    new Chart(document.getElementById("chartjs-7b"), {
+        type: "doughnut",
+        data: {
+            labels: ["Chiuse senza commenti", "Senza commenti", "Senza etichette"],
+            datasets: [{
+                label: "Issues",
+                data: [pl.close_no_comments, pl.no_commentate, pl.no_labele],
+                backgroundColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(255,255,0)"]
+            }]
+        }
+    });
 });
 
 
 /**
- * Questa funzione intercetta i dati che servono per i grafici e li imposta
- */
+* Questa funzione intercetta i dati che servono per i grafici e li imposta
+*/
 channel.on("stato", pl => {
-  console.log('STATO', pl);
+    console.log('STATO', pl);
 
-  $('body').bootstrapMaterialDesign();
-  $('.collapse').collapse();
+    $('body').bootstrapMaterialDesign();
+    $('.collapse').collapse();
 
-  new Chart(document.getElementById("chartjs-4b"), {
-      type: "doughnut",
-      data: {
-          labels: ["Aperte", "Chiuse"],
-          datasets: [{
-              label: "Issues",
-              data: [pl.aperte, pl.chiuse],
-              backgroundColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"]
-          }]
-      }
-  });
+    new Chart(document.getElementById("chartjs-4b"), {
+        type: "doughnut",
+        data: {
+            labels: ["Aperte", "Chiuse"],
+            datasets: [{
+                label: "Issues",
+                data: [pl.aperte, pl.chiuse],
+                backgroundColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"]
+            }]
+        }
+    });
 });
 
 /**
- * Questa funzione intercetta la lista e visualizza la lista di issues
- */
+* Questa funzione intercetta la lista e visualizza la lista di issues
+*/
 channel.on("lista", pl => {
-  var table = $('#tableContent');
-  var issue = {};
-  var html = '';
-  var btn = {};
-  var stringDate = '';
-  var YYYY = '';
-  var MM = '';
-  var DD = '';
-  var DATE = '';
-
-  btn.icon = function(icon) {
+    var table = $('#tableContent');
+    var issue = {};
     var html = '';
+    var btn = {};
+    var stringDate = '';
+    var YYYY = '';
+    var MM = '';
+    var DD = '';
+    var DATE = '';
 
-    html  = '<i class="'+icon+'" >';
-    html += "</i>";
+    btn.icon = function(icon) {
+        var html = '';
 
-    return html;
-  };
+        html  = '<i class="'+icon+'" >';
+        html += "</i>";
 
-  if(pl.issues.length) {
-    table.empty();
-  };
+        return html;
+    };
 
-  for(var is in pl.issues) {
-    issue = pl.issues[is];
-
-    if(issue.state === 'open') {
-      html  = "<tr>";
-      html += "<td style='text-align:left'>" + issue.title + "</td>";
-
-      html += "<td data-toggle='tooltip' title='Stato: aperto'>";
-      html +=  btn.icon('ion-checkmark-round') + "</td>";
-
-      if(issue.body.length > 200) {
-        issue.body = issue.body.slice(0, 200) + '...';
-      }
-
-      //html += "<td data-toggle=\"modal\" data-target=\"#modalIssueGithub\" data-descr=\""+issue.descr+"\" onclick='window.setDescr(this)'>";
-      //html +=  btn.icon('ion-document-text') + "</td>";
-
-      YYYY = moment(issue.created_at).year();
-      MM = moment(issue.created_at).month();
-      DD = moment(issue.created_at).day();
-      DATE = DD +'/'+ MM +'/'+ YYYY;
-
-      stringDate = "Creato il: " + DATE;
-
-      YYYY = moment(issue.updated_at).year();
-      MM = moment(issue.updated_at).month();
-      DD = moment(issue.updated_at).day();
-      DATE = DD +'/'+ MM +'/'+ YYYY;
-
-      stringDate += "\nModificato il: " + DATE;
-
-      html += "<td data-toggle='tooltip' title='"+stringDate+"'>" + btn.icon('ion-calendar') + "</td>";
-
-      stringDate = "Visualizza su GitHub.com";
-      html += "<td data-toggle='tooltip' title='"+stringDate+"'>";
-      html += "<a href='" +issue.url+ "' target='_blank'>" + btn.icon('ion-social-github') + "</a></td>";
-
-      html += "</tr>";
-
-      table.append(html);
+    if(pl.issues.length) {
+        table.empty();
     }
 
-    $('[data-toggle="tooltip"]').tooltip();
-  }
+    for(var is in pl.issues) {
+        issue = pl.issues[is];
 
-  console.log('LISTA', pl);
+        if(issue.state === 'open') {
+            html  = "<tr>";
+            html += "<td style='text-align:left'>" + issue.title + "</td>";
+
+            html += "<td data-toggle='tooltip' title='Stato: aperto'>";
+            html +=  btn.icon('ion-checkmark-round') + "</td>";
+            //
+            // if(issue.body.length > 200) {
+            //     issue.body = issue.body.slice(0, 200) + '...';
+            // }
+
+            //html += "<td data-toggle=\"modal\" data-target=\"#modalIssueGithub\" data-descr=\""+issue.descr+"\" onclick='window.setDescr(this)'>";
+            //html +=  btn.icon('ion-document-text') + "</td>";
+
+            YYYY = moment(issue.created_at).year();
+            MM = moment(issue.created_at).month();
+            DD = moment(issue.created_at).day();
+            DATE = DD +'/'+ MM +'/'+ YYYY;
+
+            stringDate = "Creato il: " + DATE;
+
+            YYYY = moment(issue.updated_at).year();
+            MM = moment(issue.updated_at).month();
+            DD = moment(issue.updated_at).day();
+            DATE = DD +'/'+ MM +'/'+ YYYY;
+
+            stringDate += "\nModificato il: " + DATE;
+
+            html += "<td data-toggle='tooltip' title='"+stringDate+"'>" + btn.icon('ion-calendar') + "</td>";
+
+            stringDate = "Visualizza su GitHub.com";
+            html += "<td data-toggle='tooltip' title='"+stringDate+"'>";
+            html += "<a href='" +issue.url+ "' target='_blank'>" + btn.icon('ion-social-github') + "</a></td>";
+
+            html += "</tr>";
+
+            table.append(html);
+        }
+
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+
+    console.log('LISTA', pl);
 });
 
 export default socket
 
 
 $(document).ready(function() {
-  $('body').bootstrapMaterialDesign();
-  $('.collapse').collapse();
+    $('body').bootstrapMaterialDesign();
+    $('.collapse').collapse();
 });
