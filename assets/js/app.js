@@ -12,15 +12,15 @@ socket.connect()
 let channel = socket.channel("metrics:lobby", {})
 
 channel.join()
-.receive("ok", resp => { console.log("Joined successfully", resp) })
-.receive("error", resp => { console.log("Unable to join", resp) })
+    .receive("ok", resp => { console.log("Joined successfully", resp) })
+    .receive("error", resp => { console.log("Unable to join", resp) })
 
 // Instanzio tutte le variabili che mi servono
 let url_btn = $('#url_btn');
 let url = $('#url');
 let login_btn = $('#login-btn');
 let name = $('#exampleInputEmail1');
-let password = $('#exampleInputPassword1');
+let password = $('#exampleInputPashidesword1');
 let defaultUrl = "https://github.com/italia/anpr";
 
 // Funzione che richiede tramite socket varie informazioni al server
@@ -30,13 +30,27 @@ var channelsPush = function() {
     if(url.val())
     tmpUrl = url.val();
 
-    console.log("PUSH INIT: ", tmpUrl);
+    var data = {
+        url: tmpUrl,
+        name: name.val(),
+        password: password.val()
+    };
 
-    channel.push("stato", { url: tmpUrl, name: name.val(), password: password.val()});
-    channel.push("info", {url: tmpUrl, name: name.val(), password: password.val()});
-    channel.push("closetime", { url: tmpUrl, name: name.val(), password: password.val()});
-    channel.push("resptime", { url: tmpUrl, name: name.val(), password: password.val()});
-    channel.push("lista", { url: tmpUrl, name: name.val(), password: password.val()});
+    channel.push("stato", data);
+    channel.push("info", data);
+    channel.push("resptime", data);
+    channel.push("closetime", data);
+    channel.push("lista", data);
+
+    $("#chartjs-7b").hide();
+    $("#chartjs-gff").hide();
+    $("#chartjs-0b").hide();
+    $("#chartjs-4b").hide();
+
+    $("#loading-7b").show();
+    $("#loading-gff").show();
+    $("#loading-0b").show();
+    $("#loading-4b").show();
 
     console.log("PUSH FINISH");
 };
@@ -76,10 +90,10 @@ channel.on("resptime", pl => {
         if(tmp1.time) {
             onlyOpen.push(Math.round(tmp1.time / 60));
             rangeOpen.push("IS " + tmp2++);
-        };
+        }
 
         totTime += Math.round(tmp1.time / 60);
-    };
+    }
 
     var nMedia = 0;
     nMedia = Math.round(totTime / pl.resp.length);
@@ -87,7 +101,10 @@ channel.on("resptime", pl => {
     var aMedia = [];
     for(var b in onlyOpen) {
         aMedia.push(nMedia);
-    };
+    }
+
+    $('#loading-0b').hide();
+    $('#chartjs-0b').show();
 
     new Chart(document.getElementById("chartjs-0b"), {
         type: 'line',
@@ -107,7 +124,7 @@ channel.on("resptime", pl => {
                 lineTension: 0.1
             }]
         },
-        options: {}
+        options: {  }
     });
 });
 channel.on("closetime", pl => {
@@ -138,6 +155,9 @@ channel.on("closetime", pl => {
         aMedia.push(nMedia);
     };
 
+    $('#loading-gff').hide();
+    $('#chartjs-gff').show();
+
     new Chart(document.getElementById("chartjs-gff"), {
         type: 'line',
         data: {
@@ -163,6 +183,9 @@ channel.on("closetime", pl => {
 channel.on("info", pl => {
     console.log('CHANNEL GET PUSH: INFO', pl);
 
+    $('#loading-7b').hide();
+    $('#chartjs-7b').show();
+
     new Chart(document.getElementById("chartjs-7b"), {
         type: "doughnut",
         data: {
@@ -185,6 +208,8 @@ channel.on("stato", pl => {
 
     $('body').bootstrapMaterialDesign();
     $('.collapse').collapse();
+    $('#chartjs-4b').show();
+    $('#loading-4b').hide();
 
     new Chart(document.getElementById("chartjs-4b"), {
         type: "doughnut",
