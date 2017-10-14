@@ -60,8 +60,6 @@ defmodule Gitmetrics.Managment  do
       %{
         id: Map.get(issue, "id"),
         number: Map.get(issue, "number"),
-        assegnati: Map.get(issue, "assignees") |> get_assegnati(),
-        body: Map.get(issue, "body"),
         created_at: Map.get(issue, "created_at"),
         closed_at: Map.get(issue, "closed_at"),
         comments: Map.get(issue, "comments"),
@@ -71,17 +69,6 @@ defmodule Gitmetrics.Managment  do
         labels: Map.get(issue, "labels") |> get_labels(),
         state:  Map.get(issue, "state"),
       }
-    end
-
-    #ritorna lista di tutti account assegnati a questa issue
-    defp get_assegnati([]), do: []
-    defp get_assegnati(lista) do
-      lista
-      |> Enum.reduce([], fn(x, acc) -> acc ++ [
-        %{
-          avatar: Map.get(x, "avatar_url"),
-          name: Map.get(x, "login"),
-         }] end)
     end
 
     #ritorna labels del issue
