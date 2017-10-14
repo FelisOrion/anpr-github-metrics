@@ -20,7 +20,7 @@ let url_btn = $('#url_btn');
 let url = $('#url');
 let login_btn = $('#login-btn');
 let name = $('#exampleInputEmail1');
-let password = $('#exampleInputPashidesword1');
+let password = $('#exampleInputPassword1');
 let defaultUrl = "https://github.com/italia/anpr";
 
 // Funzione che richiede tramite socket varie informazioni al server
@@ -35,6 +35,9 @@ var channelsPush = function() {
         name: name.val(),
         password: password.val()
     };
+
+    console.log("PUSH INIT", tmpUrl);
+    console.log("PUSH DATA", data);
 
     channel.push("stato", data);
     channel.push("info", data);
