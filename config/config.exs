@@ -22,9 +22,13 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-  config :gitmetrics, Gitmetrics.Guardian,
-         issuer: "gitmetrics",
-         secret_key: "W3q3u3k6lwvkC1mRXZeZHpJB4IawvCxTxTUTmLDpCEW+ZKfebXn/GWhKz5tzNKZ3"
+config :cipher, keyphrase: "p6ZiWaxuN90Q0BmjyhuztYGO1RKVabb2OFF4yJn/2WmiOIDUjqDLVaMHPSBN34pa",
+               ivphrase: "GrBKReHddUNVNVQUSUd8fH/uT2cdnSDscGWp8SgiEwUnjDBBb26YCtnR8xh8DfeL",
+               magic_token: "abracadabrasimsalabim"
+
+config :gitmetrics, Gitmetrics.Guardian,
+       issuer: "gitmetrics",
+       secret_key: "Edfly+kq3Zb+7urdppkxerTvue4TI2SxzxjC6myVSi1yDtSCf5A4m3vaxqHUJHqE"
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"

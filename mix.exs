@@ -50,6 +50,8 @@ defmodule Gitmetrics.Mixfile do
       {:flow, "~> 0.11"},
       {:oauth2, "~> 0.7"},
       {:guardian, "~> 1.0-beta"},
+      {:secure_random, "~> 0.5", override: true},
+      {:cipher, ">= 1.3.3", override: true},
       {:cachex, "~> 2.1"},
       {:cowboy, "~> 1.0"}
     ]

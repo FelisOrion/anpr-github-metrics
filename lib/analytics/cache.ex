@@ -39,7 +39,6 @@ defmodule Gitmetrics.Cache do
   """
   def update(org, repo) do
     with {:ok, list} <- Tentacat.Issues.filter(org, repo, %{state: "all"})
-                        |> IO.inspect
                         |> Managment.can_i_send? do
       push("#{org}/#{repo}", list)
     end

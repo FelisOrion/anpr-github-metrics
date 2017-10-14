@@ -58,6 +58,6 @@ config :gitmetrics, Gitmetrics.Repo,
   pool_size: 10
 
 config :gitmetrics, GitHub,
-  client_id: System.get_env("GITHUB_CLIENT_ID"),
-  client_secret: System.get_env("GITHUB_CLIENT_SECRET"),
-  redirect_uri: System.get_env("GITHUB_REDIRECT_URI")
+  client_id: "4479fa5ec626a71bb1be",
+  client_secret: "f00dee14b8dc9c8207f8f420208323441f20f9ee",
+  redirect_uri: "https://jlujbgsmbb.localtunnel.me"

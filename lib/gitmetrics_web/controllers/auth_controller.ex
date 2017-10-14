@@ -1,6 +1,9 @@
 defmodule GitmetricsWeb.AuthController do
   use GitmetricsWeb, :controller
 
+  alias Gitmetrics.Guardian
+  alias GitmetricsWeb.Endpoint, as: End
+
   @doc """
   This action is reached via `/auth/:provider` and redirects to the OAuth2 provider
   based on the chosen strategy.
@@ -27,17 +30,14 @@ defmodule GitmetricsWeb.AuthController do
 
     # Request the user's data with the access token
     user = get_user!(provider, client)
-
-    # Store the user in the session under `:current_user` and redirect to /.
-    # In most cases, we'd probably just store the user's ID that can be used
-    # to fetch from the database. In this case, since this example app has no
-    # database, I'm just storing the user map.
-    #
-    # If you need to make additional resource requests, you may want to store
-    # the access token as well.
+    IO.inspect(client)
+    IO.inspect(user)  
+    with {:ok, token, claims} <- Guardian.encode_and_sign(%{token: client.token.access_token}, %{}, token_ttl: {30, :days}) do
+      token
+      |> Cipher.encrypt()
+      End.broadcast("metrics:lobby", "authenticatione", %{username: user["name"], avatar: user["picture"], token: token})
+    end
     conn
-    |> put_session(:current_user, user)
-    |> put_session(:access_token, client.token.access_token)
     |> redirect(to: "/")
   end
 

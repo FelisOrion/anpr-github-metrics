@@ -71,10 +71,12 @@ defmodule GitmetricsWeb.MetricsChannel do
 
   defp send_issues_time_auth?(list, payload) do
     {org, repo} = Managment.init_url(payload["url"])
-    if payload["name"] == "" || payload["password"] == "" do
+    if payload["token"] == "" || payload["token"] == nil  do
       Managment.send_issues_time(list, org, repo)
     else
-      Managment.send_issues_time(list, org, repo, Tentacat.Client.new(%{user: payload["name"], password: payload["password"]}))
+      token = payload["token"]
+              |> Cipher.decrypt()
+      Managment.send_issues_time(list, org, repo, Tentacat.Client.new(%{access_token: token}))
     end
   end
   # It is also common to receive messages from the client and
@@ -82,10 +84,12 @@ defmodule GitmetricsWeb.MetricsChannel do
 
   # Add authorization logic here as required.
   defp authorized?(url, payload) do
-    if payload["name"] == "" || payload["password"] == "" do
+    if payload["token"] == "" || payload["token"] == nil do
       Managment.api_call(url)
     else
-      Managment.api_call(url, %{user: payload["name"], password: payload["password"]})
+      token = payload["token"]
+              |> Cipher.decrypt
+      Managment.api_call(url, %{access_token: token})
     end
   end
 
