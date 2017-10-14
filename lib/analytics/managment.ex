@@ -1,15 +1,18 @@
 defmodule Gitmetrics.Managment  do
-    alias Gitmetrics.Cache
-    alias Tentacat.Issues.Comments
     @moduledoc """
     Modulo per github api
     """
 
+    alias Gitmetrics.Cache
+    alias Tentacat.Issues.Comments
 
     @doc """
     Prendo dal url solo ultime due parti -> organizzazione e ripo
     """
+
     @spec init_url(String.t) :: {String.t, String.t}
+    def init_url(nil), do: {"italia", "anpr"}
+    def init_url(""), do: {"italia", "anpr"}
     def init_url(url) do
        url
         |> String.split("/")
@@ -51,7 +54,6 @@ defmodule Gitmetrics.Managment  do
          _ -> []
        end
     end
-
 
     @doc """
     inserisci dati delle issue in una mappa dalla chiamata api_call
