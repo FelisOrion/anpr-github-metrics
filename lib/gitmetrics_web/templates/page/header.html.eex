@@ -1,37 +1,31 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-  <div class="container">
-    <h3 class="navbar-brand"><b>APNR</b> <small><b>GitHub</b> Issues Tracker</small></h3>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <div class="container"    >
+    <h3 class="navbar-brand"><b>Git</b>Metrics</small></h3>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left:30px">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item" data-toggle="tooltip" title="Tempo di prima risposta (segnalazioni aperte)">
-          <a class="nav-link" href="#P1">G1</a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" title="Stato segnalazioni">
-          <a class="nav-link" href="#P2">G2</a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" title="Tipologie di segnalazioni">
-          <a class="nav-link" href="#P3">G3</a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" title="Tempo di prima risposta (segnalazioni chiuse)">
-          <a class="nav-link" href="#P4">G4</a>
+    <div class="navbar-collapse" id="navbarSupportedContent" style="margin-left:30px" >
+      <ul  style="flex-direction: unset;" class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a href="/auth/github/callback"><button id="open_modal_login" class="btn btn-outline-success my-2 my-sm-0" style="margin-left:14px">Login</button></a>
+          </li>
+
+          <!-- data-toggle="modal" data-target="#exampleModal" !-->
+
+        <li class="nav-item" data-toggle="tooltip" title="Grafici"  style="margin-left:20px">
+          <a class="nav-link" href="#P1">Grafici</a>
         </li>
         <li class="nav-item" data-toggle="tooltip" title="Lista segnalazioni aperte">
           <a class="nav-link" href="#P5">LISTA</a>
         </li>
-        <li class="nav-item">
-          <button id="open_modal_login" class="btn btn-outline-success my-2 my-sm-0" style="margin-left:14px" data-toggle="modal" data-target="#exampleModal">Login</button>
-        </li>
 
+        <li class="nav-item" style="margin-left:30px">
+            <form class="form-inline my-2 my-lg-0" action="#">
+              <input id="url" class="form-control mr-sm-2" type="text" placeholder="Repository link" aria-label="Search">
+              <input id="url_btn" class="btn btn-outline-success my-2 my-sm-0" style="margin-left:14px" value="Cerca" type="button"/>
+            </form>
+        </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0" action="#">
-        <input id="url" class="form-control mr-sm-2" type="text" placeholder="Repository link" aria-label="Search">
-        <input id="url_btn" class="btn btn-outline-success my-2 my-sm-0" style="margin-left:14px" value="Cerca" type="button"/>
-      </form>
+
     </div>
   </div>
 </nav>

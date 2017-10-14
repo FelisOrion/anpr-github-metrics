@@ -84,6 +84,7 @@ channel.on("resptime", pl => {
     var onlyOpen = [];
     var tmp1 = {};
     var tmp2 = 1;
+    var tmp3 = 0;
     var totTime = 0;
     var rangeOpen = [];
 
@@ -91,11 +92,12 @@ channel.on("resptime", pl => {
         tmp1 = pl.resp[i];
 
         if(tmp1.time) {
+            tmp3 = Math.round(tmp1.time / 60);
 
-            console.log(tmp1.time);
-
-            onlyOpen.push(Math.round(tmp1.time / 60));
-            rangeOpen.push("IS " + tmp2++);
+            if(tmp3) {
+                onlyOpen.push(tmp3);
+                rangeOpen.push("SEGNALAZIONE " + tmp2++);
+            }
         }
 
         totTime += Math.round(tmp1.time / 60);
@@ -112,46 +114,58 @@ channel.on("resptime", pl => {
     $('#loading-0b').hide();
     $('#chartjs-0b').show();
 
-    new Chart(document.getElementById("chartjs-0b"), {
-        type: 'line',
+    if(window.CHART1)
+        window.CHART1.destroy();
+
+    window.CHART1 = new Chart(document.getElementById("chartjs-0b"), {
+        type: 'bar',
         data: {
             labels: rangeOpen,
             datasets: [{
-                label: "Issues tempo risposta",
-                data: onlyOpen,
-                fill: false,
-                borderColor: "rgb(54, 162, 235)",
-                lineTension: 0.1
-            }, {
-                label: "Media tempo risposta",
+                label: "Tempo medio risposta (min)",
                 data: aMedia,
                 fill: false,
                 borderColor: "rgb(255, 99, 132)",
+                lineTension: 0.1,
+                type: 'line'
+            }, {
+                label: "Tempo risposta (min)",
+                data: onlyOpen,
+                fill: false,
+                backgroundColor: "rgb(54, 162, 235)",
                 lineTension: 0.1
             }]
         },
         options: {  }
     });
 });
+
+channel.on("authentication", function(user) {
+    console.log('CHANNEL GET PUSH:', user);
+});
+
 channel.on("closetime", pl => {
     console.log('closetime', pl);
 
     var onlyClose = [];
     var tmp1 = {};
     var tmp2 = 1;
+    var tmp3 = 0;
     var totTime = 0;
     var rangeClose = [];
 
     for(var i in pl.close) {
         tmp1 = pl.close[i];
 
-        if(tmp1.time) {
-            onlyClose.push(Math.round(tmp1.time / 60));
-            rangeClose.push("IS " + tmp2++);
-        };
+        tmp3 = Math.round(tmp1.time / 60);
+
+        if(tmp3) {
+            onlyClose.push(tmp3);
+            rangeClose.push("SEGNALAZIONE " + tmp2++);
+        }
 
         totTime += Math.round(tmp1.time / 60);
-    };
+    }
 
     var nMedia = 0;
     nMedia = Math.round(totTime / pl.close.length);
@@ -159,26 +173,30 @@ channel.on("closetime", pl => {
     var aMedia = [];
     for(var b in onlyClose) {
         aMedia.push(nMedia);
-    };
+    }
 
     $('#loading-gff').hide();
     $('#chartjs-gff').show();
 
-    new Chart(document.getElementById("chartjs-gff"), {
-        type: 'line',
+    if(window.CHART2)
+        window.CHART2.destroy();
+
+    window.CHART2 = new Chart(document.getElementById("chartjs-gff"), {
+        type: 'bar',
         data: {
             labels: rangeClose,
             datasets: [{
-                label: "Issues tempo risposta",
-                data: onlyClose,
-                fill: false,
-                borderColor: "rgb(54, 162, 235)",
-                lineTension: 0.1
-            }, {
-                label: "Media tempo risposta",
+                label: "Tempo medio risposta (min)",
                 data: aMedia,
                 fill: false,
                 borderColor: "rgb(255, 99, 132)",
+                lineTension: 0.1,
+                type: 'line'
+            }, {
+                label: "Tempo risposta (min)",
+                data: onlyClose,
+                fill: false,
+                backgroundColor: "rgb(54, 162, 235)",
                 lineTension: 0.1
             }]
         },
@@ -192,7 +210,10 @@ channel.on("info", pl => {
     $('#loading-7b').hide();
     $('#chartjs-7b').show();
 
-    new Chart(document.getElementById("chartjs-7b"), {
+    if(window.CHART3)
+        window.CHART3.destroy();
+
+    window.CHART3 = new Chart(document.getElementById("chartjs-7b"), {
         type: "doughnut",
         data: {
             labels: ["Chiuse senza commenti", "Senza commenti", "Senza etichette"],
@@ -217,7 +238,10 @@ channel.on("stato", pl => {
     $('#chartjs-4b').show();
     $('#loading-4b').hide();
 
-    new Chart(document.getElementById("chartjs-4b"), {
+    if(window.CHART4)
+        window.CHART4.destroy();
+
+    window.CHART4 = new Chart(document.getElementById("chartjs-4b"), {
         type: "doughnut",
         data: {
             labels: ["Aperte", "Chiuse"],

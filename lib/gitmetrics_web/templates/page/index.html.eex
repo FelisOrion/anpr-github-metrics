@@ -1,70 +1,58 @@
+
 <br id="P1" />
 <br />
 <br />
 <br />
+<br />
+<br />
 
 <div class="container" >
   <div class="row">
-    <div class="col"></div>
+      <div class="col-12">
+          <h3>Tempo di prima risposta (segnalazioni aperte)</h3>
+          <p style="color:#808080">Tempo di prima risposta per ogni segnalazione (linea blu)
+          <br/>Linea rossa indicato il tempo medio di risposta di tutte le segnalazioni</p>
 
-    <div class="w-600">
-      <h3>Tempo di prima risposta (segnalazioni aperte)</h3>
-      <p style="color:#808080;max-width:770px">Tempo di prima risposta per ogni segnalazione (linea blu)
-      <br/>Linea rossa indicato il tempo medio di risposta di tutte le segnalazioni</p>
+          <canvas
+            id="chartjs-0b"
+            width="100%"
+          ></canvas>
 
-      <canvas
-        id="chartjs-0b"
-        width="770"
-        height="385"
-        style="width: 770px; height: 385px"
-      ></canvas>
-
-      <div style="width: 770px; height: 385px" id="loading-0b" >
-          <div class="sk-circle">
-              <div class="sk-circle1 sk-child"></div>
-              <div class="sk-circle2 sk-child"></div>
-              <div class="sk-circle3 sk-child"></div>
-              <div class="sk-circle4 sk-child"></div>
-              <div class="sk-circle5 sk-child"></div>
-              <div class="sk-circle6 sk-child"></div>
-              <div class="sk-circle7 sk-child"></div>
-              <div class="sk-circle8 sk-child"></div>
-              <div class="sk-circle9 sk-child"></div>
-              <div class="sk-circle10 sk-child"></div>
-              <div class="sk-circle11 sk-child"></div>
-              <div class="sk-circle12 sk-child"></div>
+          <div style="padding: 120px" id="loading-0b" >
+              <div class="sk-circle">
+                  <div class="sk-circle1 sk-child"></div>
+                  <div class="sk-circle2 sk-child"></div>
+                  <div class="sk-circle3 sk-child"></div>
+                  <div class="sk-circle4 sk-child"></div>
+                  <div class="sk-circle5 sk-child"></div>
+                  <div class="sk-circle6 sk-child"></div>
+                  <div class="sk-circle7 sk-child"></div>
+                  <div class="sk-circle8 sk-child"></div>
+                  <div class="sk-circle9 sk-child"></div>
+                  <div class="sk-circle10 sk-child"></div>
+                  <div class="sk-circle11 sk-child"></div>
+                  <div class="sk-circle12 sk-child"></div>
+              </div>
           </div>
       </div>
     </div>
-
-    <div class="col"></div>
-  </div>
 </div>
 
-<br id="P2" />
-<br />
-<br />
-<br />
 
-<div class="container" >
+<div class="container" id="P2">
   <div class="row">
-    <div class="col"></div>
-
-    <div class="w-600">
+    <div class="col-md-6 col-xs-12">
+        <br /><br /><br /><br />
       <h3>Stato segnalazioni</h3>
-      <p style="color:#808080;max-width:770px">
-        Le segnalazioni aperte sono di colore verde<br/>
-        Le segnalazioni chiuse sono di colore rosso
-      </p>
 
       <canvas
       id="chartjs-4b"
-      width="770"
-      height="385"
-      style="width: 770px; height: 385px"
+      width="100%"
       ></canvas>
 
-      <div style="width: 770px; height: 385px  ;padding: 120px" id="loading-4b" >
+      <br />
+
+      <div style="padding: 30px" id="loading-4b" >
           <div class="sk-circle">
               <div class="sk-circle1 sk-child"></div>
               <div class="sk-circle2 sk-child"></div>
@@ -80,38 +68,29 @@
               <div class="sk-circle12 sk-child"></div>
           </div>
       </div>
+
+      <br />
+      <p style="color:#808080;max-width:385px">
+        Le segnalazioni aperte sono di colore verde<br/>
+        Le segnalazioni chiuse sono di colore rosso
+      </p>
   </div>
 
-    <div class="col"></div>
-  </div>
-</div>
 
 
+    <div class="col-md-6 col-xs-12">
+      <br /><br /><br /><br />
 
-<br id="P3" />
-<br />
-<br />
-<br />
-
-<div class="container" >
-  <div class="row">
-    <div class="col"></div>
-
-    <div class="w-600">
       <h3>Tipologie di segnalazioni</h3>
-      <p style="color:#808080;max-width:770px">
-        Le segnalazione non commentate sono di colore rosso<br/>
-        Le segnalazione aperte senza etichette sono di colore giallo<br/>
-        Le segnalazione chiuse senza commenti sono di colore blu</p>
+
+      <br />
 
       <canvas
         id="chartjs-7b"
-        width="770"
-        height="385"
-        style="width: 770px; height: 385px"
+        width="100%"
       ></canvas>
 
-      <div style="width: 770px; height: 385px ;padding: 120px" id="loading-7b" >
+      <div style="padding: 30px" id="loading-7b" >
           <div class="sk-circle">
               <div class="sk-circle1 sk-child"></div>
               <div class="sk-circle2 sk-child"></div>
@@ -127,35 +106,33 @@
               <div class="sk-circle12 sk-child"></div>
           </div>
       </div>
-    </div>
 
-    <div class="col"></div>
+      <br />
+      <p style="color:#808080;max-width:385px">
+        Le segnalazione non commentate sono di colore rosso<br/>
+        Le segnalazione aperte senza etichette sono di colore giallo<br/>
+        Le segnalazione chiuse senza commenti sono di colore blu</p>
+    </div>
   </div>
 </div>
 
 
-
-<br id="P4" />
-<br />
-<br />
-<br />
-
-<div class="container" >
+<div class="container" id="P3">
   <div class="row">
-    <div class="col"></div>
-
-    <div class="w-600">
+    <div class="col-12">
+        <br />
+        <br />
+        <br />
+        <br />
       <h3>Tempo di prima risposta (segnalazioni chiuse)</h3>
       <p style="color:#808080;max-width:770px">Tempo di prima risposta per ogni segnalazione (linea blu)
       <br/>Linea rossa indicato il tempo medio di risposta di tutte le segnalazioni chiuse</p>
       <canvas
         id="chartjs-gff"
-        width="770"
-        height="385"
-        style="width: 770px; height: 385px"
+        width="100%"
       ></canvas>
 
-      <div style="width: 770px; height: 385px ;padding: 120px" id="loading-gff" >
+      <div style="padding: 120px" id="loading-gff" >
           <div class="sk-circle">
               <div class="sk-circle1 sk-child"></div>
               <div class="sk-circle2 sk-child"></div>
@@ -185,13 +162,15 @@
 
 <div class="container" >
   <div class="row">
-    <div class="col"></div>
-
-    <div class="w-600">
+    <div class="col-12">
+        <br />
+        <br />
+        <br />
+        <br />
       <h3>Lista segnalazioni aperte</h3>
-      <p style="width:770px"></p>
+      <p style="100%"></p>
 
-      <table class="table table-hover" style="max-width:770px;text-align:center">
+      <table class="table table-hover" style="width:100%;text-align:center">
         <thead>
           <tr>
             <th style="text-align:left">Titolo</th>
