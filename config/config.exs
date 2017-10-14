@@ -22,6 +22,9 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+  config :gitmetrics, Gitmetrics.Guardian,
+         issuer: "gitmetrics",
+         secret_key: "W3q3u3k6lwvkC1mRXZeZHpJB4IawvCxTxTUTmLDpCEW+ZKfebXn/GWhKz5tzNKZ3"
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"

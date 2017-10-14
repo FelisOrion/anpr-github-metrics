@@ -22,7 +22,7 @@ defmodule Gitmetrics.Managment  do
 
     #restituisce nome repository e organizzazione
     defp get_names([""]), do: []
-    defp get_names(["" | [repo | [ org | tail]]]), do: {org, repo}
+    defp get_names(["" | [repo | [ org | _tail]]]), do: {org, repo}
     defp get_names([repo | [ org | _tail ]]), do: {org, repo} #repo | organizazione
 
 
@@ -132,6 +132,7 @@ defmodule Gitmetrics.Managment  do
       |> save_in_cache(org, repo)
     end
 
+    def send_issues_time([], _, _, _, _), do: %{}
     def send_issues_time(list, org, repo, client) do
       list
       |> Enum.reduce([],
@@ -143,7 +144,7 @@ defmodule Gitmetrics.Managment  do
 
     #chiama api per caricare commenti ad ogni issue e prendere solo primo rispetto un tempo
     defp get_comments(_, _, 0, _, _, _), do: 0
-    defp get_comments(org, repo, comments, number, created_at, client) do
+    defp get_comments(org, repo, _comments, number, created_at, client) do
         Comments.filter(org, repo, number, %{since: created_at}, client)
         |> can_i_send?()
         |> get_first_commet()
@@ -152,7 +153,7 @@ defmodule Gitmetrics.Managment  do
 
     #per chiammata non authenticata cambia solo numero di rate limit
     defp get_comments(_, _, 0, _, _), do: 0
-    defp get_comments(org, repo, comments, number, created_at) do
+    defp get_comments(org, repo, _comments, number, created_at) do
         Comments.filter(org, repo, number, since: created_at)
         |> can_i_send?()
         |> get_first_commet()

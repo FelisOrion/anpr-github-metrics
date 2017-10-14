@@ -1,0 +1,506 @@
+    <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.17.1">
+    <title>Gitmetrics.Managment – Gitmetrics v0.0.1</title>
+    <link rel="stylesheet" href="dist/app-110d9134a6.css" />
+    
+    
+      
+      
+        <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
+      
+    
+    <script src="dist/sidebar_items-795f98bffa.js"></script>
+    
+  </head>
+  <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
+
+    <div class="main">
+<button class="sidebar-toggle">
+  <span class="icon-menu" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Sidebar</span>
+</button>
+<section class="sidebar">
+
+  
+  <a href="README.md.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        Gitmetrics
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        v0.0.1
+      </h2>
+    </div>
+    
+      <img src="assets/logo.jpg" alt="Gitmetrics" class="sidebar-projectImage">
+    
+  </a>
+
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <input name="q" type="text" id="search-list" class="search-input" placeholder="search" aria-label="Search" autocomplete="off" />
+  </form>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+
+    
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+
+      <h1>
+        <small class="visible-xs">Gitmetrics v0.0.1</small>
+        Gitmetrics.Managment
+        
+          <a href="https://github.com/FelisOrion/anpr-github-metrics/blob/master/lib/analytics/managment.ex#L1" title="View Source" class="view-source" rel="help">
+            <span class="icon-code" aria-hidden="true"></span>
+            <span class="sr-only">View Source</span>
+          </a>
+        
+      </h1>
+
+      
+        <section id="moduledoc">
+          <p>Modulo per github api</p>
+
+        </section>
+      
+
+      
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+          
+
+          
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#api_call/1">api_call(arg)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#api_call/2">api_call(arg, client)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Chiamata principale della lista di tutti issue presenti da qualle poi verano costruite grafici
+nel caso la trova gia nella cash la carica semplicemente.
+due Implementazione sia per autorizzati che non</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#can_i_send?/1">can_i_send?(list)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#get_data/1">get_data(issue)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>inserisci dati delle issue in una mappa dalla chiamata api_call</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#init_url/1">init_url(url)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Prendo dal url solo ultime due parti -&gt; organizzazione e ripo</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#send_close_time/1">send_close_time(list)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Restituisce lista con dentro mappate il numero del issue e suo diff del tempo di chiusura
+Tempo.creazione - Tempo.chiusura</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#send_info_status/1">send_info_status(list)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Restituisce lista di stato con tutte issue (chiuse senza commento,
+non commentate e senza un label)</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#send_issues_time/3">send_issues_time(list, org, repo)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Ritorna lista del tempo dalla creazione alla prima risposta</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#send_issues_time/4">send_issues_time(list, org, repo, client)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#send_metrics_lista/1">send_metrics_lista(list)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>restituisce la lista con descrizioni titolo e body delle issue</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#send_metrics_stato/1">send_metrics_stato(list)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Restituisce totale di issue e aperte, chiuse e in generale</p>
+</div>
+  
+</div>
+
+  </div>
+
+
+          
+
+        </section>
+      
+
+      
+
+      
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Functions
+          </h1>
+          <div class="detail" id="api_call/1">
+  
+  
+  <div class="detail-header">
+    <a href="#api_call/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">api_call(arg)</span>
+    
+      <a href="https://github.com/FelisOrion/anpr-github-metrics/blob/master/lib/analytics/managment.ex#L43" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="api_call/2">
+  
+  
+  <div class="detail-header">
+    <a href="#api_call/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">api_call(arg, client)</span>
+    
+      <a href="https://github.com/FelisOrion/anpr-github-metrics/blob/master/lib/analytics/managment.ex#L31" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Chiamata principale della lista di tutti issue presenti da qualle poi verano costruite grafici
+nel caso la trova gia nella cash la carica semplicemente.
+due Implementazione sia per autorizzati che non.</p>
+
+  </section>
+</div>
+<div class="detail" id="can_i_send?/1">
+  
+  
+  <div class="detail-header">
+    <a href="#can_i_send?/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">can_i_send?(list)</span>
+    
+      <a href="https://github.com/FelisOrion/anpr-github-metrics/blob/master/lib/analytics/managment.ex#L209" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="get_data/1">
+  
+  
+  <div class="detail-header">
+    <a href="#get_data/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">get_data(issue)</span>
+    
+      <a href="https://github.com/FelisOrion/anpr-github-metrics/blob/master/lib/analytics/managment.ex#L59" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>inserisci dati delle issue in una mappa dalla chiamata api_call</p>
+
+  </section>
+</div>
+<div class="detail" id="init_url/1">
+  
+  
+  <div class="detail-header">
+    <a href="#init_url/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">init_url(url)</span>
+    
+      <a href="https://github.com/FelisOrion/anpr-github-metrics/blob/master/lib/analytics/managment.ex#L13" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>init_url(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>) :: {<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>, <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>}</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Prendo dal url solo ultime due parti -&gt; organizzazione e ripo</p>
+
+  </section>
+</div>
+<div class="detail" id="send_close_time/1">
+  
+  
+  <div class="detail-header">
+    <a href="#send_close_time/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">send_close_time(list)</span>
+    
+      <a href="https://github.com/FelisOrion/anpr-github-metrics/blob/master/lib/analytics/managment.ex#L103" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Restituisce lista con dentro mappate il numero del issue e suo diff del tempo di chiusura
+Tempo.creazione - Tempo.chiusura</p>
+
+  </section>
+</div>
+<div class="detail" id="send_info_status/1">
+  
+  
+  <div class="detail-header">
+    <a href="#send_info_status/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">send_info_status(list)</span>
+    
+      <a href="https://github.com/FelisOrion/anpr-github-metrics/blob/master/lib/analytics/managment.ex#L116" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Restituisce lista di stato con tutte issue (chiuse senza commento,
+non commentate e senza un label)</p>
+
+  </section>
+</div>
+<div class="detail" id="send_issues_time/3">
+  
+  
+  <div class="detail-header">
+    <a href="#send_issues_time/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">send_issues_time(list, org, repo)</span>
+    
+      <a href="https://github.com/FelisOrion/anpr-github-metrics/blob/master/lib/analytics/managment.ex#L137" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Ritorna lista del tempo dalla creazione alla prima risposta</p>
+
+  </section>
+</div>
+<div class="detail" id="send_issues_time/4">
+  
+  
+  <div class="detail-header">
+    <a href="#send_issues_time/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">send_issues_time(list, org, repo, client)</span>
+    
+      <a href="https://github.com/FelisOrion/anpr-github-metrics/blob/master/lib/analytics/managment.ex#L146" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="send_metrics_lista/1">
+  
+  
+  <div class="detail-header">
+    <a href="#send_metrics_lista/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">send_metrics_lista(list)</span>
+    
+      <a href="https://github.com/FelisOrion/anpr-github-metrics/blob/master/lib/analytics/managment.ex#L201" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>restituisce la lista con descrizioni titolo e body delle issue</p>
+
+  </section>
+</div>
+<div class="detail" id="send_metrics_stato/1">
+  
+  
+  <div class="detail-header">
+    <a href="#send_metrics_stato/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">send_metrics_stato(list)</span>
+    
+      <a href="https://github.com/FelisOrion/anpr-github-metrics/blob/master/lib/analytics/managment.ex#L215" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Restituisce totale di issue e aperte, chiuse e in generale</p>
+
+  </section>
+</div>
+
+        </section>
+      
+
+      
+          <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.17.1),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+        <button class="night-mode-toggle"><span class="sr-only">Switch theme</span></button>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  <script src="dist/app-4cfb39be16.js"></script>
+  
+  </body>
+</html>
+
