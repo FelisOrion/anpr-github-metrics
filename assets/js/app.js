@@ -29,21 +29,20 @@ var channelsPush = function() {
     var storedState = localStorage.getItem('user');
     var startingState = storedState ? JSON.parse(storedState) : null;
 
+    if(!startingState)
+        startingState = {token: null};
+
     if(url.val())
         tmpUrl = url.val();
 
-    console.log("startingState", startingState)
-    if(startingState == null) {
-        var data = {
-            url: tmpUrl
-        };
-      }
-    else {
-        var data = {
-            url: tmpUrl,
-            token: startingState.token
-        };
-    }
+    console.log("startingState", startingState);
+
+    var data = {
+        url: tmpUrl
+    };
+
+    if(startingState.token)
+        data.token = startingState.token;
 
     console.log("PUSH INIT", tmpUrl);
     console.log("PUSH DATA", data);
