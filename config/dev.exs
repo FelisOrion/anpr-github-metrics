@@ -7,7 +7,7 @@ use Mix.Config
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
 config :gitmetrics, GitmetricsWeb.Endpoint,
-  http: [port: 8080],
+  http: [port: 80],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
