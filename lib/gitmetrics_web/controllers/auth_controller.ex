@@ -41,6 +41,11 @@ defmodule GitmetricsWeb.AuthController do
     |> redirect(to: "/")
   end
 
+  def callback(conn, _) do
+    conn
+    |> redirect(to: "/")
+  end
+
   defp authorize_url!("github"),   do: GitHub.authorize_url!
   defp authorize_url!(_), do: raise "No matching provider available"
 
