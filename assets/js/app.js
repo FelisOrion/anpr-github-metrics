@@ -140,8 +140,8 @@ channel.on("resptime", pl => {
     });
 });
 
-channel.on("authentication", user => {
-    console.log('CHANNEL GET PUSH:', user);
+channel.on("authenticatione", user => {
+    console.log('auth:', user);
 });
 
 channel.on("closetime", pl => {

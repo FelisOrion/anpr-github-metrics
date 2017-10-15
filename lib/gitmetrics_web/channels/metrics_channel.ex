@@ -2,6 +2,7 @@ defmodule GitmetricsWeb.MetricsChannel do
   use GitmetricsWeb, :channel
 
   alias Gitmetrics.Managment
+  alias Gitmetrics.Guardian
 
   def join("metrics:lobby", payload, socket) do
     if auth?(payload) do
@@ -74,9 +75,9 @@ defmodule GitmetricsWeb.MetricsChannel do
     if payload["token"] == "" || payload["token"] == nil  do
       Managment.send_issues_time(list, org, repo)
     else
-      token = payload["token"]
-              |> Cipher.decrypt()
-      Managment.send_issues_time(list, org, repo, Tentacat.Client.new(%{access_token: token}))
+      with {:ok, token} <- valid?(payload["token"]) do
+        Managment.send_issues_time(list, org, repo, Tentacat.Client.new(%{access_token: token}))
+      end
     end
   end
   # It is also common to receive messages from the client and
@@ -87,9 +88,18 @@ defmodule GitmetricsWeb.MetricsChannel do
     if payload["token"] == "" || payload["token"] == nil do
       Managment.api_call(url)
     else
-      token = payload["token"]
-              |> Cipher.decrypt
-      Managment.api_call(url, %{access_token: token})
+      with {:ok, token} <- valid?(payload["token"]) do
+        Managment.api_call(url, %{access_token: token})
+      end
+    end
+  end
+
+  defp valid?(token) do
+    token
+    |> Cipher.decrypt
+    with {:ok, _claims} <- Guardian.decode_and_verify(token, %{"typ" => "access"}),
+         {:ok, resources, _claimes} <- Guardian.resource_from_token(token) do
+         {:ok, resources.github}
     end
   end
 
