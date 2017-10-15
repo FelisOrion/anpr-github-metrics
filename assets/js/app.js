@@ -18,7 +18,6 @@ channel.join()
 // Instanzio tutte le variabili che mi servono
 let url_btn = $('#url_btn');
 let url = $('#url');
-let login_btn = $('#login-btn');
 let name = $('#exampleInputEmail1');
 let password = $('#exampleInputPassword1');
 let defaultUrl = "https://github.com/italia/anpr";
@@ -35,18 +34,19 @@ var channelsPush = function() {
     if(url.val())
         tmpUrl = url.val();
 
-    console.log("startingState", startingState);
-
     var data = {
         url: tmpUrl
     };
 
-    if(startingState.token)
+    if(startingState.token) {
         data.token = startingState.token;
+        if (!startingState.avatar) {
+            document.getElementById("btn-login").innerHTML = "<img height='42' width='42' src='" + startingState.avatar + "'/>";
+          } else {
+            document.getElementById("btn-login").innerHTML = "<img height='42' width='42' src= '" + "https://www.thetimes.co.uk/imageserver/image/methode%2Ftimes%2Fprodmigration%2Fweb%2Fbin%2F5ca5cbde-984c-328c-97f5-3805b28ebb87.jpg?crop=1500%2C1000%2C0%2C0&resize=685" + "'/>";
 
-    console.log("PUSH INIT", tmpUrl);
-    console.log("PUSH DATA", data);
-
+          }
+    }
     channel.push("stato", data);
     channel.push("info", data);
     channel.push("resptime", data);
@@ -63,7 +63,6 @@ var channelsPush = function() {
     $("#loading-0b").show();
     $("#loading-4b").show();
 
-    console.log("PUSH FINISH");
 };
 
 // Fai un push ad inizio pagina
@@ -87,8 +86,6 @@ window.setDescr = function(el) {
 * Questa funzione intercetta i dati che servono per i grafici e li imposta
 */
 channel.on("resptime", pl => {
-    console.log("resptime", pl);
-
     var onlyOpen = [];
     var tmp1 = {};
     var tmp2 = 1;
@@ -149,12 +146,10 @@ channel.on("resptime", pl => {
 });
 
 channel.on("authenticatione", user => {
-    console.log('auth', user)
     localStorage.setItem('user', JSON.stringify(user));
 });
 
 channel.on("closetime", pl => {
-    console.log('closetime', pl);
 
     var onlyClose = [];
     var tmp1 = {};
@@ -214,7 +209,6 @@ channel.on("closetime", pl => {
 });
 
 channel.on("info", pl => {
-    console.log('CHANNEL GET PUSH: INFO', pl);
 
     $('#loading-7b').hide();
     $('#chartjs-7b').show();
@@ -240,8 +234,6 @@ channel.on("info", pl => {
 * Questa funzione intercetta i dati che servono per i grafici e li imposta
 */
 channel.on("stato", pl => {
-    console.log('STATO', pl);
-
     $('body').bootstrapMaterialDesign();
     $('.collapse').collapse();
     $('#chartjs-4b').show();
@@ -335,7 +327,6 @@ channel.on("lista", pl => {
         $('[data-toggle="tooltip"]').tooltip();
     }
 
-    console.log('LISTA', pl);
 });
 
 export default socket

@@ -5,7 +5,7 @@
 
     <div class="navbar-collapse" id="navbarSupportedContent" style="margin-left:30px" >
       <ul  style="flex-direction: unset;" class="navbar-nav mr-auto">
-          <li class="nav-item">
+          <li id="btn-login" class="nav-item">
             <a
                 href="/auth/github"
             >
