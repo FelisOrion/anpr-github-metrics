@@ -26,14 +26,17 @@ let defaultUrl = "https://github.com/italia/anpr";
 // Funzione che richiede tramite socket varie informazioni al server
 var channelsPush = function() {
     var tmpUrl = defaultUrl;
+    var auth = localStorage.getItem('auth');
+
+    if(!auth)
+        auth = {token: null};
 
     if(url.val())
-    tmpUrl = url.val();
+        tmpUrl = url.val();
 
     var data = {
         url: tmpUrl,
-        name: name.val(),
-        password: password.val()
+        token: auth.token
     };
 
     console.log("PUSH INIT", tmpUrl);
@@ -140,8 +143,9 @@ channel.on("resptime", pl => {
     });
 });
 
-channel.on("authenticatione", user => {
-    console.log('auth:', user);
+channel.on("authenticatione", function(auth) {
+    console.log('auth', auth)
+    localStorage.setItem('auth', user);
 });
 
 channel.on("closetime", pl => {
