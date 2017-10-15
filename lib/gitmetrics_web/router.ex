@@ -13,12 +13,6 @@ defmodule GitmetricsWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", GitmetricsWeb do
-    pipe_through :browser # Use the default browser stack
-
-    get "/*path", PageController, :index
-  end
-
   scope "/auth", GitmetricsWeb do
     pipe_through :browser
 
@@ -26,6 +20,12 @@ defmodule GitmetricsWeb.Router do
     get "/:provider/callback", AuthController, :callback
     delete "/logout", AuthController, :delete
 end
+
+  scope "/", GitmetricsWeb do
+    pipe_through :browser # Use the default browser stack
+
+    get "/*path", PageController, :index
+  end
 
   # Other scopes may use custom stacks.
   # scope "/api", GitmetricsWeb do
