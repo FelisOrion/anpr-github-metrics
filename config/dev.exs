@@ -60,4 +60,4 @@ config :gitmetrics, Gitmetrics.Repo,
 config :gitmetrics, GitHub,
   client_id: "4479fa5ec626a71bb1be",
   client_secret: "f00dee14b8dc9c8207f8f420208323441f20f9ee",
-  redirect_uri: "http://50.116.59.109:4000/auth/github/callback"
+  redirect_uri: "http://50.116.59.109/auth/github/callback"
