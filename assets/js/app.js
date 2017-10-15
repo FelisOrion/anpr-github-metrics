@@ -32,7 +32,8 @@ var channelsPush = function() {
     if(url.val())
         tmpUrl = url.val();
 
-    if(!startingState) {
+    console.log("startingState", startingState)
+    if(startingState == null) {
         var data = {
             url: tmpUrl
         };
