@@ -7,8 +7,7 @@
       <ul  style="flex-direction: unset;" class="navbar-nav mr-auto">
           <li class="nav-item">
             <a
-                href="https://www.youtube.com/watch?v=4Vkd7WJ9ETY&feature=youtu.be"
-                onclick="window.open('/auth/github', '_blank');"
+                href="/auth/github"
             >
                 <button id="open_modal_login" class="btn btn-outline-success my-2 my-sm-0" style="margin-left:14px">
                     Login

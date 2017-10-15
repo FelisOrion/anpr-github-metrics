@@ -99,7 +99,7 @@ defmodule GitmetricsWeb.MetricsChannel do
     |> Cipher.decrypt
     with {:ok, _claims} <- Guardian.decode_and_verify(token, %{"typ" => "access"}),
          {:ok, resources, _claimes} <- Guardian.resource_from_token(token) do
-         {:ok, resources.github}
+         {:ok, resources["github"]}
     end
   end
 

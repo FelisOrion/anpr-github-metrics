@@ -30,11 +30,14 @@ defmodule GitmetricsWeb.AuthController do
 
     # Request the user's data with the access token
     user = get_user!(provider, client)
+    IO.inspect(user) 
+    IO.inspect(client)
     IO.inspect(client.token.access_token) 
     with {:ok, token, _claims} <- Guardian.encode_and_sign(%{github: client.token.access_token}, %{}, token_ttl: {30, :days}) do
       token
       |> Cipher.encrypt()
-      End.broadcast("metrics:lobby", "authenticatione", %{username: user["name"], avatar: user["avatar"], token: token})
+      End.broadcast("metrics:lobby", "authenticatione", %{username: user.name, avatar: user.avatar, token: 
+token})
     end
     conn
     |> redirect(to: "/")
