@@ -2,6 +2,11 @@
 
 Implementazione di un servizio che analizzi le issue github creando metriche:
 
+![alt text](https://raw.githubusercontent.com/FelisOrion/anpr-github-metrics/master/doc/assets/screen1.png)
+![alt text](https://raw.githubusercontent.com/FelisOrion/anpr-github-metrics/master/doc/assets/screen2.png)
+![alt text](https://raw.githubusercontent.com/FelisOrion/anpr-github-metrics/master/doc/assets/screen3.png)
+![alt text](https://raw.githubusercontent.com/FelisOrion/anpr-github-metrics/master/doc/assets/screen4.png)
+
 Tempo di prima risposta (medio e sua distribuzione)
 Tempo di chiusura di un ticket (medio e sua distribuzione)
 Numero di ticket aperti/chiusi
@@ -12,6 +17,8 @@ Issue chiuse senza commento
 
 
 Il servizio generico inserendo link del repository
+
+Per abilitare login con servezi Oauth di github, bisogna impostare dal account setting cliend id, dopo di che aggiungere tutte le chiavi in /config/dev.ex
 
 
 To start your Phoenix server:
