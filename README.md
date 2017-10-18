@@ -20,6 +20,11 @@ Il servizio generico inserendo link del repository
 
 Per abilitare login con servezi Oauth di github, bisogna impostare dal account setting cliend id, dopo di che aggiungere tutte le chiavi in /config/dev.ex
 
+To run run and compile ->
+first
+install Elixir (1.3 ~ 1.5) -> https://elixir-lang.org/install.html
+install Phoenix ( >= 1.3) -> https://hexdocs.pm/phoenix/installation.html
+
 
 To start your Phoenix server:
 
