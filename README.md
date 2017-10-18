@@ -2,6 +2,11 @@
 
 Implementazione di un servizio che analizzi le issue github creando metriche:
 
+![alt text](https://raw.githubusercontent.com/FelisOrion/anpr-github-metrics/master/doc/assets/screen1.png)
+![alt text](https://raw.githubusercontent.com/FelisOrion/anpr-github-metrics/master/doc/assets/screen2.png)
+![alt text](https://raw.githubusercontent.com/FelisOrion/anpr-github-metrics/master/doc/assets/screen3.png)
+![alt text](https://raw.githubusercontent.com/FelisOrion/anpr-github-metrics/master/doc/assets/screen4.png)
+
 Tempo di prima risposta (medio e sua distribuzione)
 Tempo di chiusura di un ticket (medio e sua distribuzione)
 Numero di ticket aperti/chiusi
