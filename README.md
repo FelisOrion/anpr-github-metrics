@@ -18,6 +18,8 @@ Issue chiuse senza commento
 
 Il servizio generico inserendo link del repository
 
+Per abilitare login con servezi Oauth di github, bisogna impostare dal account setting cliend id, dopo di che aggiungere tutte le chiavi in /config/dev.ex
+
 
 To start your Phoenix server:
 
